@@ -65,7 +65,7 @@ npm -v
 <p>You can run Wecodefy framework by using XAMP , WAMP, LAMP or PHP serve</p>
 <p>Then after checking everything is fine, clone this  framework or download it from here </p>
 <p>
-<a target="_brank" href="https://github.com/jahwin/wecodefy/archive/master.zip" class="wecodefy-btn">DOWNLOAD </a>
+<a target="_brank" href="https://github.com/jahwin/wecodefy/archive/v1.0.zip" class="wecodefy-btn">DOWNLOAD </a>
 </p>
 <p>After download extract downloaded zip file where you run web server projects [htdocs,www,...]. After extracting run the following commands:</p>
 
@@ -118,7 +118,7 @@ $routes = [
         'path' => '/',
         'method' => 'GET',
         'folder' => 'site',
-        'return' => 'home@welcome',
+        'return' => 'Home@welcome',
     ],
     [
         'path' => '/api',
@@ -127,7 +127,7 @@ $routes = [
                 'path' => '/',
                 'method' => 'GET',
                 'folder' => 'api',
-                'return' => 'home@welcome',
+                'return' => 'Home@welcome',
             ],
         ],
 
@@ -181,7 +181,7 @@ $routes = [
                 'path' => '/',
                 'method' => 'GET',
                 'folder' => 'api',
-                'return' => 'home@welcome',
+                'return' => 'Home@welcome',
             ],
         ],
 
@@ -199,7 +199,7 @@ $routes = [
         'method' => 'GET',
         'folder' => 'site',
         'middleware' => 'web',
-        'return' => 'home@welcome',
+        'return' => 'Home@welcome',
     ]
 ]
 ```
