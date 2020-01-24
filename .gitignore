@@ -1,0 +1,29 @@
+.DS_Store
+node_modules
+system/dev/views/node_modules
+system/dev/views/package-lock.json
+vendor
+system/cache
+dist
+
+# local env files
+.env.local
+.env.*.local
+*.lock
+package-lock.json
+mix-manifest.json
+.env
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

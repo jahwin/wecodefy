@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+
+<?php
+
+if (isset($argv[1])) {
+    if ($argv[1] == "serve") {
+      $output = shell_exec("php -S 127.0.0.1:8020");
+      echo "Listening:127.0.0.1:8020";   
+    }
+}
