@@ -37,7 +37,7 @@ class Cookies
         if (!isset($_COOKIE[$key])) {
             return true;
         }
-        setcookie("user", "", time() - 3600);
+        setcookie($key, "", time() - 3600, '/');
         return true;
     }
     /**
