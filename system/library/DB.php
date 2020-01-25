@@ -11,10 +11,10 @@ use system\dev\exec\errorsExec;
 $capsule = new Database;
 $conn = $capsule->addConnection([
     'driver' => 'mysql',
-    'host' => DB_HOST,
-    'database' => DB_NAME,
-    'username' => DB_USER,
-    'password' => DB_PASS,
+    'host' => _env('DB_HOST','127.0.0.1'),
+    'database' => _env('DB_NAME','wecodefy'),
+    'username' => _env('DB_USER','root'),
+    'password' => _env('DB_PASS','')
 ]);
 $capsule->setAsGlobal();
 $capsule->bootEloquent();

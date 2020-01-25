@@ -2,7 +2,7 @@
 
 <p align="center"><img src="wecodefy.png" width="200"></p>
 
-## About wecodefy
+## About Wecodefy
 <p>Wecodefy is framework for making web application, It can be used to create Rest API and also you can build frontend by using modern javascript framework like Angular, React , Vue. if you are not familiar with those js framework you can use Twig templating engine.</p>
 
 <p>This framework combine Angular, Vue ,React</p>
@@ -22,7 +22,7 @@ This tool will also able to generate Angular, Vue, React components, Then at end
 </p>
 
 # Documentation expectations
-<p>We have made this documantation to be very simple to be understod even by those with little programming proficiency who want to make applications</p>
+<p>We have made this documantation to be very simple to be understood even by those with little programming proficiency who want to make applications</p>
 
 
 ## Getting started :man_technologist:
