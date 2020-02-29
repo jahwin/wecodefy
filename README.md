@@ -164,6 +164,7 @@ app/http/[folder name]/controllers/home.php
 That means you have to use folder name based on folder of your controller are saved to.
 
  <b>return:</b> key in array this where your will return anything you want.
+ 
  ```
  className@funtionName
  ```
@@ -308,7 +309,62 @@ home.twig
     </body>
 </html>
 ```
-For more information about using twig tamplating  refer to <a target="_brank" href="https://twig.symfony.com/doc/2.x/"> this</a>
+For more information about using twig tamplating  refer to <a target="_brank" href="https://twig.symfony.com/doc/3.x/"> this link</a>
+
+### Creating custom twig filter and function
+There is many default filters and functions create by twig team found on this <a target="_brank" href="https://twig.symfony.com/doc/3.x/"> link</a>. But sometimes you can create your custom filter and function, This is the simple way in wecodefy to do it. Open `config/twig.php`, In that file is where you will put your filter and function. See example below.
+
+```php
+use system\library\Lang;
+/* -----------------------------
+| Twig filter management
+-------------------------------- */
+$filters = [
+    [
+        'name' => 'env',
+        'func' => function ($val) {
+            return getenv($val);
+        },
+    ], [
+        'name' => 'translate',
+        'func' => function ($val) {
+            return Lang::init()->Trans($val);
+        },
+    ],
+
+];
+
+/* -----------------------------
+| Twig functions management
+-------------------------------- */
+$functions = [
+    [
+        'name' => 'requestIs',
+        'func' => function ($url, $feedback) {
+            $url = strtolower($url);
+            if (url() == $url) {
+                return $feedback;
+            }
+        },
+    ],
+    [
+        'name' => 'requestContain',
+        'func' => function ($url, $feedback) {
+            $url = strtolower($url);
+            if (url()->contains($url)) {
+                return $feedback;
+            }
+        },
+    ],
+    [
+        'name' => 'cutText',
+        'func' => function ($string, $length, $icon) {
+            return cutText($string, $length, $icon);
+        },
+    ]
+];
+```
+
 
 ## Models
 <p>This is were you will get data from database and that data will be processed on controller then will be viewed on views.</p>
@@ -780,13 +836,14 @@ Session::destroy()
 ```
 
 ## Upload
-If you want to use session you have to use `system\library\Upload` namespace.
+If you want to use upload you have to use `system\library\Upload` namespace.
 
 ```php
-$uploaded = Upload::dir('/assets/images/')->param('files'->randomName(true)->start();
-return json_encode($uploaded);
+$files = Upload::dir("/assets/uploaded/")->param("file")->randomName(true)->Start();
 ```
+
 This is returned result after upload:
+
 ```json
 [{
     "name": "file_name.jpeg",
@@ -810,7 +867,7 @@ $email->sendEmail();
 ```
 ## Localization 
 If you want to translate your app you have to use `system\library\Lang` namespace.
-First you have to config language settings in `.env`.
+First you have to config language settings in `.env` file.
 
 ```
 # database or file

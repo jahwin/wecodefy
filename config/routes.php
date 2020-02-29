@@ -22,13 +22,7 @@ $routes = [
             ],
         ],
 
-    ],
-    [
-        'path' => 404,
-        'method' => 'GET',
-        'folder' => 'site',
-        'return' => 'Page not found',
-    ],
+    ]
 ];
 // Init routing
 Router::init($routes);

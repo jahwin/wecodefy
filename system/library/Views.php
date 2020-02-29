@@ -6,7 +6,6 @@ namespace system\library;
  * @author Abe Jahwin
  */
 use system\dev\exec\errorsExec;
-use system\library\Lang;
 
 class Views
 {
@@ -25,7 +24,7 @@ class Views
         if (file_exists($file_path)) {
             // *** Configure directories
             $this->templeting_engine = new \Twig\Loader\FilesystemLoader('app/http/' . $folder . '/views/');
-            if (_env('USE_CACHE','true') === 'true') {
+            if (_env('USE_CACHE', 'true') === 'true') {
                 $twig = new \Twig\Environment($this->templeting_engine, [
                     'cache' => 'system/cache/',
                 ]);
@@ -34,18 +33,17 @@ class Views
                 ]);
             }
 
-            // Language transilation
-            $translate_filter = new \Twig\TwigFilter('translate', function ($val) {
-                return Lang::init()->Trans($val);
-            });
-            $twig->addFilter($translate_filter);
-
-            // Env access
-            $env_filter = new \Twig\TwigFilter('env', function ($val) {
-                return getenv($val);
-            });
-            $twig->addFilter($env_filter);
-
+            $filters = null;
+            $functions = null;
+            require 'config/twig.php';
+            foreach ($filters as $key => $items) {
+                $filter = new \Twig\TwigFilter($items['name'], $items['func']);
+                $twig->addFilter($filter);
+            }
+            foreach ($functions as $key => $items) {
+                $function = new \Twig\TwigFunction($items['name'], $items['func']);
+                $twig->addFunction($function);
+            }
             return $twig->render($file, $data);
 
         } else {
