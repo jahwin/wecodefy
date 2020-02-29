@@ -6,7 +6,7 @@ class Home
 
     public function welcome()
     {
-        $this->app_url = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'];
+        $this->app_url = _env('APP_URL', "");
         require 'system/dev/views/dev_home.php';
     }
 
