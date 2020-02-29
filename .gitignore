@@ -4,7 +4,6 @@ system/dev/views/node_modules
 system/dev/views/package-lock.json
 vendor
 system/cache
-dist
 
 # local env files
 .env.local
