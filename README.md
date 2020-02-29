@@ -93,7 +93,7 @@ php run serve
 
 ## Lets talk about wecodefy structure
 <p>
-  This is nomal MVC pattern based, That means you can deal with Views, Controllers and Models
+  This is normal MVC pattern based, That means you can deal with Views, Controllers and Models
 </p>
 
 
@@ -106,11 +106,13 @@ But there is something we have to talk about called <b>Routing</b>
 ## Routing
 <p>This routing functionality will help you to map URL with defferent options like controller and call some functions, Lets take look on some examples</p>
 
-You will config routing in the directory below:
+You will config routing in the following file below:
+
 ```
 /config/routes.php
 ```
-Here you fill you route in array inside that file.
+
+Here is example of routes in array inside that file.
 
 ```php
 $routes = [
@@ -137,11 +139,12 @@ $routes = [
 
 Lets understund the code above :point_up_2:
  
- <b>path:</b> key in array this where your will put your path url,
- you can also get data from path see example below:
+ <b>path:</b> key in array is where your will put your path url,
+ you can also pass data from path see example below:
  
 
 ```php
+#You can use name as arguments in function.
 $routes = [
     [
         'path' => '/info/{name}',
@@ -152,26 +155,25 @@ $routes = [
         },
     ]
 ]
-#You can use name as arguments in function.
 ```
- <b>method:</b> key in array this where your will put request method,
- POST, GET, PUT, DELETE, OPTIONS, PATCH
+ <b>method:</b> key in array is where your will put request method like POST, GET, PUT, DELETE, OPTIONS, PATCH
 
-  <b>folder:</b> key in array this where your will put folder name where controller is located.
+<b>folder:</b> key in array this where your will put folder name where controller is located.
+
 ```
 app/http/[folder name]/controllers/home.php
 ```
 That means you have to use folder name based on folder of your controller are saved to.
 
- <b>return:</b> key in array this where your will return anything you want.
+ <b>return:</b> key in array is where your will return anything you want.
  
  ```
  className@funtionName
  ```
- Class name must have the same name with controller file name.
+ `Note:` Class name must have the same name with controller file name.
 
  ### Group routing
- You can also group routes on and prefix path.
+ You can also group routes on prefix path.
 
  ```php
 $routes = [
@@ -191,7 +193,7 @@ $routes = [
  ```
 
 ## Middleware
-You can setup different autholization on your routes. The thing you only need is to add `middleware` key on your any routes:
+You can setup different authorization on your routes. The only thing you need is to add `middleware` key on any routes:
 
 ```php
 $routes = [
@@ -204,8 +206,9 @@ $routes = [
     ]
 ]
 ```
-The you can set value initialized in `config/middleware.php`.
-
+Then you can set value initialized in `config/middleware.php`, in this example we have used `web` as value.
+<br>
+This is example of `config/middleware.php` file look like.
 ```php
 <?php
 $middleware = [
@@ -214,10 +217,11 @@ $middleware = [
 ?>
 ```
 
-Middleware files found in  `app/middlewares` folder,
+Then create middleware file (`Ex: AuthMiddleware.php file`), Middlewares files found in  `app/middlewares` folder,
 So then your middleware class look like this.
 
 ```php
+
 <?php
 namespace app\middlewares;
 
@@ -249,16 +253,16 @@ app/http/[folder name]/controllers/
 ```
 
 This is example of how it look like:
+
 ```
 # This is file name
-home.php
+Home.php
 ```
 
 ```php
 <?php
-namespace app\http\site\controllers;
+namespace app\http\foldername\controllers;
 
-use app\models\Home as HomeModel;
 use system\library\Controller;
 
 
@@ -272,13 +276,14 @@ class Home extends Controller
     public function welcome()
     {
         $data = array("name"=>"Hello world");
-        // Load template from `app/http/site/views/home/index.twig`
-        return $this->render('site', 'home/index.twig', $data);
+        // Load template from `app/http/folder name/views/home/index.twig`
+        return $this->render('folder name', 'home/index.twig', $data);
     }
 
 }
 
 ```
+Replace `folder name` with any folder your controller located.
 
 ## Views
 <p>This is were you will put your design thinking.</p>
@@ -309,10 +314,10 @@ home.twig
     </body>
 </html>
 ```
-For more information about using twig tamplating  refer to <a target="_brank" href="https://twig.symfony.com/doc/3.x/"> this link</a>
+For more information about using twig templating refer to <a target="_brank" href="https://twig.symfony.com/doc/3.x/"> this link</a>
 
 ### Creating custom twig filter and function
-There is many default filters and functions create by twig team found on this <a target="_brank" href="https://twig.symfony.com/doc/3.x/"> link</a>. But sometimes you can create your custom filter and function, This is the simple way in wecodefy to do it. Open `config/twig.php`, In that file is where you will put your filter and function. See example below.
+There is many default filters and functions create by twig team found on this <a target="_brank" href="https://twig.symfony.com/doc/3.x/"> link</a>. But sometimes you can create your own custom filter and function, This is the simple way in wecodefy to do it. Open `config/twig.php`, In that file is where you will put your filter and function. See example below.
 
 ```php
 use system\library\Lang;
@@ -364,10 +369,16 @@ $functions = [
     ]
 ];
 ```
+So then you can use your filters and functions in your template any where.
 
+```html
+ <h1>{{'APP_URL' | env}} </h1>
+```
 
 ## Models
-<p>This is were you will get data from database and that data will be processed on controller then will be viewed on views.</p>
+<p>This is were you will get data from database and that data will be processed on controller after that will be viewed on views.</p>
+
+Model location:
 
 ```
 app/models
@@ -376,7 +387,7 @@ app/models
 This is example of how it look like:
 ```
 # This is file name
-user.php
+User.php
 ```
 
 ```php
@@ -397,12 +408,14 @@ class User extends Models {
 ?>
 ```
 
-For more information about Query Builder refer to <a href="https://laravel.com/docs/5.8/queries">this</a>
+For more information about Query Builder refer to <a href="https://laravel.com/docs/5.8/queries">this link</a>
+
 
 # You can generate Models,Views,Controller by using Dev Management Tool
-```
-# Use this url and make sure your app is in developement mode [.env]
 
+Before use below url make sure your app is in developement mode [.env]
+
+```
 http://{app_url}/dev-ui
 ```
 <p>
@@ -413,10 +426,10 @@ http://{app_url}/dev-ui
 Here we are going to talk about database connetion, migration and seeding.
 
 ## Database connetion
-You have to set database connetion in .env file if not exist create it, this file must have the same content with .env.example, so then you can set you database connetion
+You have to set database connetion in .env file, if file not exist create it, this file must have the same content with .env.example, so then you can set you database connetion
 
 ```
-# This is database .env variable
+# This is database .env variables
 
 DATABASE_HOST = 127.0.0.1
 DATABASE_NAME = db_wecodefy
@@ -501,22 +514,22 @@ $db_down_migration = [
 ?>
 ```
 
-Let's undestund the above code:
+Let's understand the above code:
 
-- [x] <b>key:</b> This is the unique identifyer for that migration
-- [x] <b>table:</b> This is the name of table that effect will take off.
+- [x] <b>key:</b> This is the unique identifier for that migration
+- [x] <b>table:</b> This is the name of table.
 - [x] <b>todo:</b> This is the action will take place
      - create : This will be only used to create table with its fields
      - update : This will be only used to update fields structure in table
      - delete : This will be only used to delete table
      - rename : This will be only used to rename table
 - [x] <b>run:</b> This is what will be executed, but there are something you have to pay atention.
-    - if you want to rename table you have to enter table name here.
+    - if you want to rename table you have to enter new table name here.
     - If you want to drop table you have to enter 'drop' keyword.
     - If you want create or update table you have to use  Blueprint function initialization
 - [x] <b>reason:</b> This is the reason you are making that migration.
 
-For more about creating or updating table columns refer to <a href="https://laravel.com/docs/5.8/migrations#creating-columns"> this </a>
+For more about creating or updating table columns refer to <a href="https://laravel.com/docs/5.8/migrations#creating-columns"> this link </a>
 
 # Seeding
 
@@ -557,7 +570,6 @@ $database_seeder = [
 ```
 
 ## This is a list of generator
-
 
 ##### `Basic generator`
 ```php
@@ -791,10 +803,11 @@ $database_seeder = [
     $generate->randomHtml(2,3);   // <html> content .... </html>
 ```
 
-# You can run migration and seeding by using Dev Management Tool
-```
-# Use this url and make sure your app is in developement mode [.env]
+# You can also run migration and seeding by using Dev Management Tool
 
+Before use this url make sure your app is in development mode in `.env` file
+
+```
 http://{app_url}/dev-ui
 ```
 <p>
@@ -806,7 +819,8 @@ http://{app_url}/dev-ui
 ## Cookies
 If you want to use cookies you have to use `system\library\Cookies` namespace.
 
-This some cookies important functions:
+Cookies important functions:
+
 ```php
 // Allow to add cookie
 Cookies::add($key, $value, $day);
@@ -821,7 +835,8 @@ Cookies::check()
 ## Session
 If you want to use session you have to use `system\library\Session` namespace.
 
-This some cookies important functions:
+Session important functions:
+
 ```php
 // Allow to start session
 Session::init();
@@ -839,13 +854,20 @@ Session::destroy()
 If you want to use upload you have to use `system\library\Upload` namespace.
 
 ```php
-$files = Upload::dir("/assets/uploaded/")->param("file")->randomName(true)->Start();
+$files = Upload::dir("/assets/uploaded/")->param("files")->randomName(true)->Start();
 ```
 
-This is returned result after upload:
+This is returned array result after upload:
 
 ```json
 [{
+    "name": "file_name.jpeg",
+    "size": 77164,
+    "type": "image/jpeg",
+    "realname": "file_name.jpeg",
+    "url": "http://wecodefy.test/https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/file_name.jpeg"
+},
+{
     "name": "file_name.jpeg",
     "size": 77164,
     "type": "image/jpeg",
@@ -886,7 +908,7 @@ How to change locale?
  Lang::init()->setLocale('fr-fr');
 ```
 <p>
-   This the way of making transilation in your different keywords:
+   This the way of making translation in your different keywords:
 <p>
 
 ```php
@@ -894,7 +916,7 @@ How to change locale?
 $translated = Lang::init()->Trans($text)
 ```
 
-```twig
+```html
 <!-- In twig templating -->
 
 <!DOCTYPE html>
@@ -912,7 +934,7 @@ $translated = Lang::init()->Trans($text)
 </html>
 ```
 
-All keyword will be saved automatical  in default locale file or database based on your localization settings.
+All keyword will be saved automatically in default locale file or database based on your localization settings.
 
 ```php
 // In file
@@ -925,14 +947,14 @@ $keywords = array(
 );
 ```
 
-In database all keywords will be saved in  `lang-keywords` table.
+In database all keywords will be saved in `lang-keywords` table.
 
 ##### Getting language index
 
 ```php
  $langList = Lang::init()->getLangIndex();
 ```
-This will return array of languages fund in `config/lang.php` or database in `lang-index` based on `LANGUAGE_STORAGE` setting.
+This will return array of languages fund in `config/lang.php` or database based on `LANGUAGE_STORAGE` setting.
 
 ## Cors
 Now you can set your cors settings in `config/cors.php`
@@ -946,7 +968,7 @@ $cols->init([
 ]);
 ```
 ## FlashData
-This is an option of storing data and get destroyed when used. you can use `system\library\FlashData` namespace
+This is an option of storing data and get destroyed after use. use `system\library\FlashData` namespace.
 
 ```php
 // Allow to add flashdata
@@ -959,101 +981,17 @@ FlashData::Get($key);
 # Some usefull functions
 
 ## Urls
-
-By default all controller and resource routes will use a simplified version of their url as name.
-
-You easily use the `url()` shortcut helper function to retrieve urls for your routes or manipulate the current url.
-
-`url()` will return a `Url` object which will return a `string` when rendered, so it can be used safely in templates etc. but 
-contains all the useful helpers methods in the `Url` class like `contains`, `indexOf` etc. 
-
-
-### Get the current url
-
-It has never been easier to get and/or manipulate the current url.
-
-The example below shows you how to get the current url:
+`url()` function will return a `Url` object which will return a `string`. but 
+contains all the useful helpers methods in the `Url` class like `contains`, `getParam`, `getAbsoluteUrl`. 
 
 ```php
 # output: /current-url
 url();
-```
 
-### Get by name (single route)
-
-```php
-# output: /product-view/22/?category=shoes
-url('product', ['id' => 22], ['category' => 'shoes']);
-
-# output: /product-view/?category=shoes
-url('product', null, ['category' => 'shoes']);
-```
-
-### Get by name (controller route)
-
-```php
-
-# output: /images/view/?category=shows
-url('picture@getView', null, ['category' => 'shoes']);
-
-# output: /images/view/?category=shows
-url('picture', 'getView', ['category' => 'shoes']);
-
-# output: /images/view/
-url('picture', 'view');
-```
-
-### Get by class
-
-```php
-# output: /product-view/22/?category=shoes
-url('ProductsController@show', ['id' => 22], ['category' => 'shoes']);
-
-# output: /images/image/?id=22
-url('ImagesController@getImage', null, ['id' => 22]);
-```
-
-### Using custom names for methods on a controller/resource route
-
-```php
-url('gadgets.iphone');
-# output
-# /gadgets/iphoneinfo/
-```
-
-### Manipulating url
-You can easily manipulate the query-strings, by adding your get param arguments.
-
-```php
-# output: /current-url?q=cars
-
-url(null, null, ['q' => 'cars']);
-```
-
-You can remove a query-string parameter by setting the value to `null`. 
-
-The example below will remove any query-string parameter named `q` from the url but keep all others query-string parameters:
-
-```php
-$url = url()->removeParam('q');
-```
-
-
-### Useful url tricks
-
-Calling `url` will always return a `Url` object. Upon rendered it will return a `string` of the relative `url`, so it's safe to use in templates etc.
-
-However this allow us to use the useful methods on the `Url` object like `indexOf` and `contains` or retrieve specific parts of the url like the path, querystring parameters, host etc. You can also manipulate the url like removing- or adding parameters, changing host and more.
-
-In the example below, we check if the current url contains the `/api` part.
-
-```php
+# we check if the current url contains the `/api` part.
 if(url()->contains('/api')) {
     // ... do stuff
 }
-```
-
-```php
 # Grab the query-string parameter id from the current-url.
 $id = url()->getParam('id');
 
@@ -1119,25 +1057,6 @@ The example below will return an `InputFile` object if the parameter was found o
 $object = input()->file($index, $defaultValue = null);
 ```
 
-### Managing files
-
-```php
-/**
- * Loop through a collection of files uploaded from a form on the page like this
- * <input type="file" name="images[]" />
- */
-
-foreach(input()->file('images', []) as $image)
-{
-    if($image->getMime() === 'image/jpeg') 
-    {
-        $destinationFilname = sprintf('%s.%s', uniqid(), $image->getExtension());
-        $image->move(sprintf('/uploads/%s', $destinationFilename));
-    }
-}
-
-```
-
 ### Get all parameters
 
 ```php
@@ -1151,23 +1070,6 @@ $values = input()->all([
 ]);
 ```
 
-All object implements the `IInputItem` interface and will always contain these methods:
-
-- `getIndex()` - returns the index/key of the input.
-- `getName()` - returns a human friendly name for the input (company_name will be Company Name etc).
-- `getValue()` - returns the value of the input.
-
-`InputFile` has the same methods as above along with some other file-specific methods like:
-
-- `getFilename` - get the filename.
-- `getTmpName()` - get file temporary name.
-- `getSize()` - get file size.
-- `move($destination)` - move file to destination.
-- `getContents()` - get file content.
-- `getType()` - get mime-type for file.
-- `getError()` - get file upload error.
-- `hasError()` - returns `bool` if an error occurred while uploading (if `getError` is not 0).
-- `toArray()` - returns raw array
 
 ## Cut text
 
@@ -1185,19 +1087,18 @@ isContain($string, $prefix);
 ## Paginate
 
 ```php
-paginate($data, $item_to_show, $page_number);
+paginate($data, $number_of_items_to_show, $page_number);
 ```
 
 ## getToken
-
-This allow to generate number or string token
+This method allow to generate number or string token
 
 ```php
 getToken($length = 8, $type = 'string'); // or number
 ```
 
 ## Responce
-Here you can prodide your responce with http code
+Here you can provide your responce with http code
 
 ```php
 responce($data,$http_code);
@@ -1217,10 +1118,9 @@ You can start using this angular framework in the following location:
 ```
 js/angular
 ```
-So then you can start build your app. if you want to generate some components or services you can use Dev management tool.
+So then you can start code your app. if you want to generate some components or services you can use Dev management tool.
+before use this url make sure your app is in developement mode [.env]
 ```
-# Use this url and make sure your app is in developement mode [.env]
-
 http://{app_url}/dev-ui
 ```
 <p>
@@ -1234,17 +1134,18 @@ You can start using this Vue framework in the following location:
 ```
 js/vue
 ```
-So then you can start build your app. if you want to generate some components you can use Dev management tool.
-```
-# Use this url and make sure your app is in developement mode [.env]
+So then you can start code your app. if you want to generate some components you can use Dev management tool.
+before use this url make sure your app is in developement mode [.env]
 
+```
 http://{app_url}/dev-ui
 ```
+
 <p>
 <img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/vue_dev_tool.png" width="600">
 </p>
 
-For more information about using vue js framework refer to <a target="_brank" href="https://vuejs.org/v2/guide/">this</a>
+For more information about using vue js framework refer to <a target="_brank" href="https://vuejs.org/v2/guide/">this link</a>
 
 
 ## `React`
@@ -1252,21 +1153,20 @@ You can start using this React framework in the following location:
 ```
 js/react
 ```
-So then you can start build your app. if you want to generate some components you can use Dev management tool.
+So then you can start code your app. if you want to generate some components you can use Dev management tool.
+before use this url make sure your app is in developement mode [.env]
 ```
-# Use this url and make sure your app is in developement mode [.env]
-
 http://{app_url}/dev-ui
 ```
 <p>
 <img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/react_dev_tool.png" width="600">
 </p>
 
-For more information about using react js framework refer to <a target="_brank" href="https://www.w3schools.com/REACT/react_components.asp">this</a>
+For more information about using react js framework refer to <a target="_brank" href="https://www.w3schools.com/REACT/react_components.asp">this link</a>
 
-## JS Build 
-This build will combine both react,vue,angular into a single bundle based on `webpack.mix.js`, you can separete base on what you want.
-If you want to make live build when you are developing your app use this command in root of your project.
+## JSBuild 
+JSBuild will combine both react,vue,angular into a single bundle based on `webpack.mix.js` config, you can separate base on what you want.
+Here is some important commands, run those commands in root of your project.
 
 ```
 # Hot build
@@ -1279,15 +1179,14 @@ npm run dev
 npm run prod
 ```
 
-You can Also build for production without command by using Dev Management Tool.
+You can also build for production without command by using Dev Management Tool.
 <p>
 <img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/js_build_dev_tool.png" width="600">
 </p>
 
 ---
 Thank you for taking your time and read all of this, Some documentation content come from outside packages docs.<br>
-
-Have good job. Make your jod done and fast.
+Have good job. Make your job done and fast.
 
 ----
 ### Contributing
