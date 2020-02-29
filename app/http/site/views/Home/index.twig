@@ -68,7 +68,7 @@
 
 	<body>
 		<div class="wecodefy-widget">
-			<img src="/wecodefy.png" width="200" alt="">
+			<img src="{{'APP_URL' | env}}assets/images/wecodefy.png" width="200" alt="">
 		</div>
 		<div class="wecodefy-options">
 			<a target="_brank" href="/dev-ui" class="wecodefy-btn">DEV MANAGER</a>
@@ -93,6 +93,6 @@
 	</body>
 
 
-	<script type="text/javascript" src="http://wecodefy.test/assets/js/main.js"></script>
+	<script type="text/javascript" src="{{'APP_URL' | env}}assets/js/main.js"></script>
 
 </html>

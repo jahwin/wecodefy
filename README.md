@@ -1,15 +1,15 @@
 # WECODEFY WEB FRAMEWORK : Better v1.0
 
-<p align="center"><img src="wecodefy.png" width="200"></p>
+<p align="center"><img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/wecodefy.png" width="200"></p>
 
 ## About Wecodefy
 <p>Wecodefy is framework for making web application, It can be used to create Rest API and also you can build frontend by using modern javascript framework like Angular, React , Vue. if you are not familiar with those js framework you can use Twig templating engine.</p>
 
 <p>This framework combine Angular, Vue ,React</p>
 <p>
-<img src="assets/images/react_logo.svg" width="80">
-<img src="assets/images/vue_logo.png" style="margin-right:10px" width="50">
-<img src="assets/images/angular_logo.png" width="55">
+<img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/react_logo.svg" width="80">
+<img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/vue_logo.png" style="margin-right:10px" width="50">
+<img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/angular_logo.png" width="55">
 </p>
 
 #### Wecodefy has Dev management tool
@@ -18,7 +18,7 @@
 This tool will also able to generate Angular, Vue, React components, Then at end you can build your JavaScript codes<p>
 
 <p>
-<img src="assets/images/dev-tool.png" width="600">
+<img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/dev-tool.png" width="600">
 </p>
 
 # Documentation expectations
@@ -28,7 +28,7 @@ This tool will also able to generate Angular, Vue, React components, Then at end
 ## Getting started :man_technologist:
 <p>
 After installation you will get this page:<br>
-<img src="assets/images/starter-page.png" width="600">
+<img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/starter-page.png" width="600">
 </p>
 
 #### Requirement
@@ -406,7 +406,7 @@ For more information about Query Builder refer to <a href="https://laravel.com/d
 http://{app_url}/dev-ui
 ```
 <p>
-<img src="assets/images/dev-tool.png" width="600">
+<img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/dev-tool.png" width="600">
 </p>
 
 # Database
@@ -798,7 +798,7 @@ $database_seeder = [
 http://{app_url}/dev-ui
 ```
 <p>
-<img src="assets/images/dev_database_section.png" width="600">
+<img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/dev_database_section.png" width="600">
 </p>
 
 # Lets talk about some important functionality
@@ -850,7 +850,7 @@ This is returned result after upload:
     "size": 77164,
     "type": "image/jpeg",
     "realname": "file_name.jpeg",
-    "url": "http://wecodefy.test/assets/images/file_name.jpeg"
+    "url": "http://wecodefy.test/https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/file_name.jpeg"
 }]
 ```
 
@@ -1224,7 +1224,7 @@ So then you can start build your app. if you want to generate some components or
 http://{app_url}/dev-ui
 ```
 <p>
-<img src="assets/images/angular_dev_tool.png" width="600">
+<img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/angular_dev_tool.png" width="600">
 </p>
 
 For more information about using angular js framework refer to <a target="_brank" href="https://angular.io/">this</a>
@@ -1241,7 +1241,7 @@ So then you can start build your app. if you want to generate some components yo
 http://{app_url}/dev-ui
 ```
 <p>
-<img src="assets/images/vue_dev_tool.png" width="600">
+<img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/vue_dev_tool.png" width="600">
 </p>
 
 For more information about using vue js framework refer to <a target="_brank" href="https://vuejs.org/v2/guide/">this</a>
@@ -1259,7 +1259,7 @@ So then you can start build your app. if you want to generate some components yo
 http://{app_url}/dev-ui
 ```
 <p>
-<img src="assets/images/react_dev_tool.png" width="600">
+<img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/react_dev_tool.png" width="600">
 </p>
 
 For more information about using react js framework refer to <a target="_brank" href="https://www.w3schools.com/REACT/react_components.asp">this</a>
@@ -1281,7 +1281,7 @@ npm run prod
 
 You can Also build for production without command by using Dev Management Tool.
 <p>
-<img src="assets/images/js_build_dev_tool.png" width="600">
+<img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/js_build_dev_tool.png" width="600">
 </p>
 
 ---

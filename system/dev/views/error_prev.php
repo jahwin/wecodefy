@@ -96,7 +96,7 @@ use system\dev\exec\errorsExec;
             <nav class='error_nav'>
                 <div class='error-brand-widget'>
                     <span class='error_logo'>
-                    <img src='/wecodefy.png' alt=''>
+                    <img src='/assets/images/wecodefy.png' alt=''>
                 </span>
                     <span class='error_type'><?=errorsExec::display_error($Error['Type'])?></span>
                 </div>
