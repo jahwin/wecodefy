@@ -18,7 +18,7 @@ class Email extends PHPMailer
     private $to_email = null;
     private $to_name = null;
     private $subject = null;
-    private $html = null;
+    private $body = null;
 
     /**
      * @desc Allow to set email settings
@@ -32,7 +32,7 @@ class Email extends PHPMailer
         $this->password = $password;
         $this->security = $security;
         $this->port = $port;
-        $this->$is_html = $is_html;
+        $this->is_html = $is_html;
     }
 
     /**
@@ -44,9 +44,6 @@ class Email extends PHPMailer
     {
         $this->from_email = $email;
         $this->from_name = $name;
-        $this->security = $security;
-        $this->port = $port;
-        $this->$is_html = $is_html;
     }
 
     /**
@@ -67,13 +64,8 @@ class Email extends PHPMailer
      */
     public function template($subject, $title, $body)
     {
-
-        $html = '
-         Dear ' . $this->to_name . '
-          ' . $title . ' ' . $body;
         $this->subject = $subject;
-        $this->html = $html;
-
+        $this->body = $body;
     }
 
     /**
@@ -83,11 +75,6 @@ class Email extends PHPMailer
      */
     public function sendEmail()
     {
-
-        $this->security = $security;
-        $this->port = $port;
-        $this->$is_html = $is_html;
-
         try {
             //Server settings
             $this->SMTPDebug = 0; // Enable verbose debug output
@@ -104,9 +91,9 @@ class Email extends PHPMailer
             $this->addAddress($this->to_email, $this->to_name); // Add a recipient
 
             //Content
-            $this->isHTML($this->$is_html); // Set email format to HTML
             $this->Subject = $this->subject;
-            $this->Body = $this->html;
+            $this->Body = $this->body;
+            $this->isHTML($this->is_html); // Set email format to HTML
             $this->AltBody = '';
             $this->send();
             return true;
