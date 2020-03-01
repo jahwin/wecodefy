@@ -29,15 +29,7 @@ $db_up_migration = [
         }
         ,
         'reason'=>'Creating tb_books table'
-	],
-	[
-        'key' => 3,
-		'table'=>'tb_books',
-		"todo" =>'rename',
-        'run' => "tb_book",
-        'reason'=>'Reaname tb_books to tb_book table'
-    ]
-
+	]
 ];
 
 /**
