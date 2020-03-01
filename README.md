@@ -104,7 +104,7 @@ php run serve
 But there is something we have to talk about called <b>Routing</b>
 
 ## Routing
-<p>This routing functionality will help you to map URL with defferent options like controller and call some functions, Lets take look on some examples</p>
+<p>This routing functionality will help you to map URL with different options like controller and call some functions, Lets take look on some examples</p>
 
 You will config routing in the following file below:
 
