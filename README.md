@@ -1255,7 +1255,7 @@ Have good job. Make your job done and fast.
 ----
 ### Contributing
 
-You are welcome to make contribution on this framework, Let make better wold by making most powerfull and beautiful web application.
+You are welcome to make contribution on this framework, Let make better wold by making most powerful and beautiful web application.
 
 
 ### Security Vulnerabilities
