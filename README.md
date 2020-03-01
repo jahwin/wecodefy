@@ -22,7 +22,7 @@ This tool will also able to generate Angular, Vue, React components, Then at end
 </p>
 
 # Documentation expectations
-<p>We have made this documantation to be very simple to be understood even by those with little programming proficiency who want to make applications</p>
+<p>We have made this documentation to be very simple to be understood even by those with little programming proficiency who want to make applications</p>
 
 
 ## Getting started :man_technologist:
@@ -40,11 +40,11 @@ After installation you will get this page:<br>
 - [x] <b>Internet:</b> Internet will be used to install php and npm dependencies
 
 #### Installation
-<p>To install WeCodefy, first make sure that PHP and Node are installed in the local computer.
+<p>To install Wecodefy, first make sure that PHP and Node are installed in the local computer.
 In case node is not installed in your computer click 
 <a href="https://nodejs.org/en/download/" target="_brank">here</a> to install it.</p>
 
-To check if PHP, node and npm, are sussesfully installed in your computer, run the following commands in your terminal or command prompty:<br>
+To check if PHP, node and npm, are successfully installed in your computer, run the following commands in your terminal or command prompt:<br>
 ``` 
 # For checking php version
 php -v 
@@ -67,7 +67,7 @@ npm -v
 <p>
 <a target="_brank" href="https://github.com/jahwin/wecodefy/archive/v1.0.zip" class="wecodefy-btn">DOWNLOAD </a>
 </p>
-<p>After download extract downloaded zip file where you run web server projects [htdocs,www,...]. After extracting run the following commands:</p>
+<p>After download extract downloaded zip file where you run web server projects [htdocs, www,...]. After extracting run the following commands:</p>
 
 ``` 
 # This command is for installing  php composer packages
@@ -89,7 +89,7 @@ npm install
 php run serve
 ```
 
-<p>After running your project you will get Starter page we mensioned above.</p>
+<p>After running your project you will get Starter page we mentioned above.</p>
 
 ## Lets talk about wecodefy structure
 <p>
@@ -97,8 +97,8 @@ php run serve
 </p>
 
 
-- [x] <b>Views:</b> This is where your will put your desing thinking
-- [x] <b>Controllers:</b> This is where your will put your bussiness logics
+- [x] <b>Views:</b> This is where your will put your design thinking
+- [x] <b>Controllers:</b> This is where your will put your business logics
 - [x] <b>Models:</b> This is where your will manage your data from database
 
 But there is something we have to talk about called <b>Routing</b>
@@ -137,7 +137,7 @@ $routes = [
 ]
 ```
 
-Lets understund the code above :point_up_2:
+Lets understand the code above :point_up_2:
  
  <b>path:</b> key in array is where your will put your path url,
  you can also pass data from path see example below:
@@ -246,7 +246,7 @@ class AuthMiddleware implements IMiddleware
 ```
 
 ## Controllers
-<p>This is were you will put your bussiness logics, see directory below to see were it can be created manual.</p>
+<p>This is were you will put your business logics, see directory below to see were it can be created manual.</p>
 
 ```
 app/http/[folder name]/controllers/
@@ -413,7 +413,7 @@ For more information about Query Builder refer to <a href="https://laravel.com/d
 
 # You can generate Models,Views,Controller by using Dev Management Tool
 
-Before use below url make sure your app is in developement mode [.env]
+Before use below url make sure your app is in development mode [.env]
 
 ```
 http://{app_url}/dev-ui
@@ -423,10 +423,10 @@ http://{app_url}/dev-ui
 </p>
 
 # Database
-Here we are going to talk about database connetion, migration and seeding.
+Here we are going to talk about database connection, migration and seeding.
 
-## Database connetion
-You have to set database connetion in .env file, if file not exist create it, this file must have the same content with .env.example, so then you can set you database connetion
+## Database connection
+You have to set database connection in .env file, if file not exist create it, this file must have the same content with .env.example, so then you can set you database connection
 
 ```
 # This is database .env variables
@@ -438,7 +438,7 @@ DATABASE_USER = root
 DATABASE_PASS = 12345
 ```
 ## Database migration
-This the way of manipurating database schema. You don't neen to generate every file that can be used for making migration.
+This the way of manipulating database schema. You don't need to generate every file that can be used for making migration.
 
 ```
 # Use this file located here
@@ -523,7 +523,7 @@ Let's understand the above code:
      - update : This will be only used to update fields structure in table
      - delete : This will be only used to delete table
      - rename : This will be only used to rename table
-- [x] <b>run:</b> This is what will be executed, but there are something you have to pay atention.
+- [x] <b>run:</b> This is what will be executed, but there are something you have to pay attention.
     - if you want to rename table you have to enter new table name here.
     - If you want to drop table you have to enter 'drop' keyword.
     - If you want create or update table you have to use  Blueprint function initialization
@@ -548,7 +548,7 @@ use Faker\Factory;
 $generate = Factory::create();
 /**
 * --------------------------------------------
-* Enserting fake data in database
+* Inserting fake data in database
 * -------------------------------------------
 * Don't change this variable name
 */
@@ -978,7 +978,7 @@ FlashData::Add($key, $data);
 FlashData::Get($key);
 ```
 
-# Some usefull functions
+# Some useful functions
 
 ## Urls
 `url()` function will return a `Url` object which will return a `string`. but 
@@ -1098,7 +1098,7 @@ getToken($length = 8, $type = 'string'); // or number
 ```
 
 ## Responce
-Here you can provide your responce with http code
+Here you can provide your response with http code
 
 ```php
 responce($data,$http_code);
@@ -1119,7 +1119,7 @@ You can start using this angular framework in the following location:
 js/angular
 ```
 So then you can start code your app. if you want to generate some components or services you can use Dev management tool.
-before use this url make sure your app is in developement mode [.env]
+before use this url make sure your app is in development mode [.env]
 ```
 http://{app_url}/dev-ui
 ```
@@ -1135,7 +1135,7 @@ You can start using this Vue framework in the following location:
 js/vue
 ```
 So then you can start code your app. if you want to generate some components you can use Dev management tool.
-before use this url make sure your app is in developement mode [.env]
+before use this url make sure your app is in development mode [.env]
 
 ```
 http://{app_url}/dev-ui
@@ -1154,7 +1154,7 @@ You can start using this React framework in the following location:
 js/react
 ```
 So then you can start code your app. if you want to generate some components you can use Dev management tool.
-before use this url make sure your app is in developement mode [.env]
+before use this url make sure your app is in development mode [.env]
 ```
 http://{app_url}/dev-ui
 ```
@@ -1165,7 +1165,7 @@ http://{app_url}/dev-ui
 For more information about using react js framework refer to <a target="_brank" href="https://www.w3schools.com/REACT/react_components.asp">this link</a>
 
 ## JSBuild 
-JSBuild will combine both react,vue,angular into a single bundle based on `webpack.mix.js` config, you can separate base on what you want.
+JSBuild will combine both react, vue, angular into a single bundle based on `webpack.mix.js` config, you can separate base on what you want.
 Here is some important commands, run those commands in root of your project.
 
 ```
@@ -1191,7 +1191,7 @@ Have good job. Make your job done and fast.
 ----
 ### Contributing
 
-You are welcome to make contribution on this framework, Let make better wold by making most powerfull and beatfull web application.
+You are welcome to make contribution on this framework, Let make better wold by making most powerfull and beautiful web application.
 
 
 ### Security Vulnerabilities
