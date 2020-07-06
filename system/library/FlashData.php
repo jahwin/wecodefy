@@ -6,25 +6,15 @@ class FlashData
     private static $instance;
 
     /**
-     * @desc Allow to init session
-     * @param
-     * @return  FlashData
-     */
-    public static function init()
-    {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-        self::$instance = new self();
-        return self::$instance;
-    }
-    /**
      * @desc Allow to add new session data
      * @param $key,$data
      * @return "" | bolean
      */
     public static function Add($key, $data)
     {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         if (!isset($_SESSION[$key])) {
             $_SESSION[$key] = array();
         }
@@ -38,6 +28,9 @@ class FlashData
      */
     public static function Get($key)
     {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         if (!isset($_SESSION[$key])) {
             return null;
         }
