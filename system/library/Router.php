@@ -18,7 +18,7 @@ class Router extends SimpleRouter
      * @desc Allow init routing
      * @param $routes - Array of routes
      */
-    public static function init($routes)
+    public static function init($routes, $condition = null)
     {
         $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         if (isContain($url, '/api')) {
@@ -30,20 +30,63 @@ class Router extends SimpleRouter
         require 'config/middleware.php';
         // All routes
         foreach ($routes as $router) {
-            // Check if there are children routes
-            if (isset($router['children'])) {
-                // Check Auth for group
-                if (isset($router['middleware'])) {
-                    if (isset($middleware[$router['middleware']])) {
+            // All request without notfound page
+            if ($router['path'] != '*') {
+                // Check if there are children routes
+                if (isset($router['children'])) {
+                    // Check Auth for group
+                    if (isset($router['middleware'])) {
+                        if (isset($middleware[$router['middleware']])) {
+                            $children_routers = $router['children'];
+                            // Group routing
+                            parent::group([
+                                'prefix' => $router['path'],
+                                'middleware' => $middleware[$router['middleware']],
+                            ], function () use ($children_routers) {
+                                // All children routing
+                                foreach ($children_routers as $children_router) {
+                                    // Check auth
+                                    if (isset($children_router['middleware'])) {
+                                        if (isset($middleware[$children_router['middleware']])) {
+                                            // Load responce and check method
+                                            Router::methodIntegration($children_router);
+                                        } else {
+                                            $error = array(
+                                                'Type' => 'Middleware not found',
+                                                'Message' => 'Middleware  with key <b>' . $children_router['middleware'] . '</b> not found ',
+                                                'Dir' => 'config/middleware.php',
+                                                'Code' => '0006',
+                                            );
+                                            errorsExec::show($error);
+                                        }
+                                    } else {
+                                        Router::methodIntegration($children_router);
+                                    }
+
+                                }
+                            });
+
+                        } else {
+                            $error = array(
+                                'Type' => 'Middleware not found',
+                                'Message' => 'Middleware  with key <b>' . $router['middleware'] . '</b> not found ',
+                                'Dir' => 'config/middleware.php',
+                                'Code' => '0006',
+                            );
+                            errorsExec::show($error);
+                        }
+                    } else {
+                        // No auth on group
                         $children_routers = $router['children'];
-                        // Group routing
+                        //Group routing
                         parent::group([
-                            'prefix' => $router['path'],
-                            'middleware' => $middleware[$router['middleware']],
-                        ], function () use ($children_routers) {
-                            // All children routing
+                            'prefix' => $router['path']], function () use ($children_routers) {
+                            // Get a list of middleware
+                            $middleware = null;
+                            require 'config/middleware.php';
+                            // Load children routes
                             foreach ($children_routers as $children_router) {
-                                // Check auth
+                                //Auth routes
                                 if (isset($children_router['middleware'])) {
                                     if (isset($middleware[$children_router['middleware']])) {
                                         // Load responce and check method
@@ -58,59 +101,24 @@ class Router extends SimpleRouter
                                         errorsExec::show($error);
                                     }
                                 } else {
+                                    // No Auth for route
                                     Router::methodIntegration($children_router);
                                 }
 
                             }
                         });
-
-                    } else {
-                        $error = array(
-                            'Type' => 'Middleware not found',
-                            'Message' => 'Middleware  with key <b>' . $router['middleware'] . '</b> not found ',
-                            'Dir' => 'config/middleware.php',
-                            'Code' => '0006',
-                        );
-                        errorsExec::show($error);
                     }
                 } else {
-                    // No auth on group
-                    $children_routers = $router['children'];
-                    //Group routing
-                    parent::group([
-                        'prefix' => $router['path']], function () use ($children_routers) {
-                        // Get a list of middleware
-                        $middleware = null;
-                        require 'config/middleware.php';
-                        // Load children routes
-                        foreach ($children_routers as $children_router) {
-                            //Auth routes
-                            if (isset($children_router['middleware'])) {
-                                if (isset($middleware[$children_router['middleware']])) {
-                                    // Load responce and check method
-                                    Router::methodIntegration($children_router);
-                                } else {
-                                    $error = array(
-                                        'Type' => 'Middleware not found',
-                                        'Message' => 'Middleware  with key <b>' . $children_router['middleware'] . '</b> not found ',
-                                        'Dir' => 'config/middleware.php',
-                                        'Code' => '0006',
-                                    );
-                                    errorsExec::show($error);
-                                }
-                            } else {
-                                // No Auth for route
-                                Router::methodIntegration($children_router);
-                            }
-
-                        }
-                    });
+                    // Load responce and check method for single route
+                    Router::methodIntegration($router);
                 }
             } else {
-                // Load responce and check method for single route
-                Router::methodIntegration($router);
+                parent::error(function () use ($router) {
+                    Router::onError($router);
+                });
             }
         }
+
         // Allow to start routing
         parent::start();
     }
@@ -141,6 +149,60 @@ class Router extends SimpleRouter
             }
         }
     }
+    public static function onError($router)
+    {
+        $return = $router['return'];
+        // Check is string
+        if (is_string($return) && $return !== '') {
+            // Check if contain @ symbol
+            if (strpos($return, '@') !== false) {
+                $filter_class_and_fun = trim($return, '@');
+                $filter_class_and_fun = explode('@', $filter_class_and_fun);
+                $controller_path = 'app/http/' . $router['folder'] . '/controllers/' . $filter_class_and_fun[0] . '.php';
+                // Controller name
+                $controller_name = $filter_class_and_fun[0];
+                //Funtion name
+                $funtion_name = $filter_class_and_fun[1];
+                if (file_exists($controller_path)) {
+                    $folder = $router['folder'];
+                    if (method_exists("app\http\\" . $folder . "\controllers\\" . $controller_name, $funtion_name)) {
+                        // get responce
+                        $class = "app\http\\" . $folder . "\controllers\\" . $controller_name;
+                        $error_class = new $class();
+                        echo $error_class->$funtion_name();
+                    } else {
+                        $error = array(
+                            'Type' => 'Funtion not found',
+                            'Message' => 'Function <b>' . $funtion_name . '</b> not found in class called <b>' . $controller_name . '</b> in [' . $controller_path . '] file',
+                            'Dir' => $controller_path,
+                            'Code' => '0003',
+                        );
+                        errorsExec::show($error);
+                    }
+
+                } else {
+                    $error = array(
+                        'Type' => 'File missing',
+                        'Message' => 'Controller file not found in [' . $controller_path . ']',
+                        'Dir' => $controller_path,
+                        'Code' => '0001',
+                    );
+                    errorsExec::show($error);
+                }
+            } else {
+                // When is string
+                $string = $return;
+                echo $string;
+            }
+        } else if (is_int($return) && $return !== '') {
+            // When is intiger
+            $int = $return;
+            echo $int;
+        } else {
+            // Get responce
+            echo $return;
+        }
+    }
 
     /**
      * @desc Allow init routing
@@ -153,7 +215,6 @@ class Router extends SimpleRouter
         require 'config/middleware.php';
         // What to return on routes
         $return = $router['return'];
-
         // Check Auth
         if (isset($router['middleware'])) {
             // Load Auth
