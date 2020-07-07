@@ -1,0 +1,55 @@
+.wecodefy-widget {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.wecodefy-options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.wecodefy-btn {
+    background: #8cc73f;
+    padding: 10px 27px;
+    border-radius: 5px;
+    color: #fff;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.wecodefy-btn:hover {
+    color: #000;
+}
+
+svg#clouds {
+    position: fixed;
+    bottom: -160px;
+    left: -230px;
+    z-index: -10;
+    width: 1920px;
+}
+
+.app-widget {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 80px;
+}
+
+.vue-app {
+    width: 33.33333333%;
+}
+
+.angular-app {
+    width: 33.33333333%;
+}
+
+.react-app {
+    width: 33.33333333%;
+}

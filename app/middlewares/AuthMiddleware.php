@@ -9,10 +9,10 @@ class AuthMiddleware implements IMiddleware
 
     public function handle(Request $request): void
     {
-        $user = "User";
+        $user = null;
         // If authentication failed, redirect request to 404 page.
-        if ( $user === null) {
-            responce("",404);
+        if ($user === null) {
+            responce("User not Allowed", 402);
         }
 
     }

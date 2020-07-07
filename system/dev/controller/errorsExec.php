@@ -15,11 +15,9 @@ class errorsExec
      */
     public static function show($Error)
     {
-        $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         if (_env('DEVELOPMENT', true) === 'true') {
-
             //When is api
-            if (strpos($url, '/api') !== false) {
+            if (strpos(url(), '/api') !== false) {
                 errorsExec::API_Error($Error);
             } else {
                 // When is website

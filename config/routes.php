@@ -11,7 +11,7 @@ $routes = [
         'method' => 'GET',
         'folder' => 'site',
         'middleware' => 'web',
-        'return' => 'home@welcome',
+        'return' => 'Home@welcome',
     ],
     [
         'path' => '/api',
@@ -36,18 +36,22 @@ $routes = [
 /* -----------------------------
  * This is condition array, please don't change any key just add values
  * This will be user if you want to redirect all route to the same controller function
+ * -----
+ * This condition will be good for Vue,Angular,React
+ * -----
+ * Let that framework to handle routes
+ * ----
+ * You can enable or disable this condition
  * ------------------------------
  */
 $route_condition = [
-    'ENABLED' => false,
-    'ALL_TO' => function () {
-        return array(
-            'folder' => 'site',
-            'return' => 'home@welcome',
-        );
-    },
-    'EXEPT' => ['/api'],
+    'ENABLED' => true,
+    'ALL_TO' => [
+        'folder' => 'site',
+        'return' => 'Home@welcome',
+    ],
+    'EXCEPT' => ['/api'],
 ];
 
-// Init routing , condition valiable is optional
+// Init routing
 Router::init($routes, $route_condition);

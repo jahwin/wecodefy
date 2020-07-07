@@ -1,5 +1,5 @@
 <?php
-namespace app\http\api\controllers;
+namespace app\controllers\api;
 
 use app\models\User;
 use system\library\Controller;

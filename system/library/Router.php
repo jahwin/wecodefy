@@ -3,8 +3,11 @@
 namespace system\library;
 
 use Nette\Http\Response;
+use Pecee\Http\Request;
+use Pecee\SimpleRouter\Exceptions\NotFoundHttpException;
 use Pecee\SimpleRouter\SimpleRouter;
 use system\dev\controller\errorsExec;
+use \Exception;
 
 /**
  * @desc this class will hold functions for routing
@@ -20,15 +23,76 @@ class Router extends SimpleRouter
      */
     public static function init($routes, $condition = null)
     {
-        $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        if (isContain($url, '/api')) {
+        if (isContain(url(), '/api')) {
             header('Access-Control-Allow-Headers: Content-type');
             header('Content-type: application/json');
         }
+        /* ----------------------
+         * Developer routes
+         * ----------------------
+         */
+        if (_env('DEVELOPMENT', true) === 'true') {
+            parent::group(['prefix' => "/dev/ui"], function () {
+
+                parent::get('/', 'system\dev\controller\Home@welcome');
+                parent::get('/{path}', 'system\dev\controller\Home@welcome')->where(['path' => '(database)']);
+                // API
+                parent::group(['prefix' => "/api"], function () {
+                    parent::post('/generate', 'system\dev\controller\Generate@init');
+                    parent::get('/run-migration', 'system\dev\controller\Database@runMigration');
+                    parent::get('/reverse-migration', 'system\dev\controller\Database@reverseMigration');
+                    parent::get('/run-seeder', 'system\dev\controller\Database@runSeeder');
+                    parent::get('/reverse-seeder', 'system\dev\controller\Database@reverseSeeder');
+                    parent::post('/angular-g-component', 'system\dev\controller\Angular@generateComponent');
+                    parent::post('/angular-g-service', 'system\dev\controller\Angular@generateService');
+                    parent::post('/create-vue-component', 'system\dev\controller\Vue@generateComponent');
+                    parent::post('/create-react-component', 'system\dev\controller\React@generateComponent');
+                    parent::get('/build-js', 'system\dev\controller\Build@buildComponent');
+                });
+            });
+        }
+        /* ----------------------
+         * End of developer routes
+         * ----------------------
+         */
+        if ($condition['ENABLED']) {
+            $except = $condition['EXCEPT'];
+            $routes = array_filter(
+                $routes,
+                function ($e) use ($except) {
+                    foreach ($except as $value) {
+                        return $e['path'] == $value;
+                    }
+                }
+            );
+            if (count($routes) > 0) {
+                // All routes
+                Router::processRoutes($routes);
+            }
+            $router = $condition['ALL_TO'];
+            $router['method'] = 'GET';
+            parent::error(function (Request $request, \Exception $exception) use ($router) {
+                if ($exception instanceof NotFoundHttpException && $exception->getCode() === 404) {
+                    Router::onSingleRoute($router);
+                    responce("", 200);
+                }
+            });
+        } else {
+            // All routes
+            Router::processRoutes($routes);
+        }
+        // Allow to start routing
+        parent::start();
+    }
+    /**
+     * @desc Allow to run process array of routes
+     * @param $routes - Array of routes
+     */
+    public static function processRoutes($routes)
+    {
         // Load middleware classes from file
         $middleware = null;
         require 'config/middleware.php';
-        // All routes
         foreach ($routes as $router) {
             // All request without notfound page
             if ($router['path'] != '*') {
@@ -113,14 +177,13 @@ class Router extends SimpleRouter
                     Router::methodIntegration($router);
                 }
             } else {
-                parent::error(function () use ($router) {
-                    Router::onError($router);
+                parent::error(function (Request $request, \Exception $exception) use ($router) {
+                    if ($exception instanceof NotFoundHttpException && $exception->getCode() === 404) {
+                        Router::onSingleRoute($router);
+                    }
                 });
             }
         }
-
-        // Allow to start routing
-        parent::start();
     }
     /**
      * @desc Allow to add method
@@ -149,7 +212,7 @@ class Router extends SimpleRouter
             }
         }
     }
-    public static function onError($router)
+    public static function onSingleRoute($router)
     {
         $return = $router['return'];
         // Check is string
@@ -158,16 +221,16 @@ class Router extends SimpleRouter
             if (strpos($return, '@') !== false) {
                 $filter_class_and_fun = trim($return, '@');
                 $filter_class_and_fun = explode('@', $filter_class_and_fun);
-                $controller_path = 'app/http/' . $router['folder'] . '/controllers/' . $filter_class_and_fun[0] . '.php';
+                $controller_path = 'app/controllers/' . $router['folder'] . '/' . $filter_class_and_fun[0] . '.php';
                 // Controller name
                 $controller_name = $filter_class_and_fun[0];
                 //Funtion name
                 $funtion_name = $filter_class_and_fun[1];
                 if (file_exists($controller_path)) {
                     $folder = $router['folder'];
-                    if (method_exists("app\http\\" . $folder . "\controllers\\" . $controller_name, $funtion_name)) {
+                    if (method_exists("app\controllers\\" . $folder . "\\" . $controller_name, $funtion_name)) {
                         // get responce
-                        $class = "app\http\\" . $folder . "\controllers\\" . $controller_name;
+                        $class = "app\controllers\\" . $folder . "\\" . $controller_name;
                         $error_class = new $class();
                         echo $error_class->$funtion_name();
                     } else {
@@ -225,15 +288,15 @@ class Router extends SimpleRouter
                     if (strpos($return, '@') !== false) {
                         $filter_class_and_fun = trim($return, '@');
                         $filter_class_and_fun = explode('@', $filter_class_and_fun);
-                        $controller_path = 'app/http/' . $router['folder'] . '/controllers/' . $filter_class_and_fun[0] . '.php';
+                        $controller_path = 'app/controllers/' . $router['folder'] . '/' . $filter_class_and_fun[0] . '.php';
                         // Controller name
                         $controller_name = $filter_class_and_fun[0];
                         //Funtion name
                         $funtion_name = $filter_class_and_fun[1];
                         if (file_exists($controller_path)) {
                             $folder = $router['folder'];
-                            $returned_controller = "app\http\\" . $folder . "\controllers\\" . $controller_name . "@" . $funtion_name;
-                            if (method_exists("app\http\\" . $folder . "\controllers\\" . $controller_name, $funtion_name)) {
+                            $returned_controller = "app\controllers\\" . $folder . "\\" . $controller_name . "@" . $funtion_name;
+                            if (method_exists("app\controllers\\" . $folder . "\\" . $controller_name, $funtion_name)) {
                                 // get responce
                                 parent::$method($router["path"], $returned_controller, ['middleware' => $middleware[$router['middleware']]]);
                             } else {
@@ -295,15 +358,15 @@ class Router extends SimpleRouter
                 if (strpos($return, '@') !== false) {
                     $filter_class_and_fun = trim($return, '@');
                     $filter_class_and_fun = explode('@', $filter_class_and_fun);
-                    $controller_path = 'app/http/' . $router['folder'] . '/controllers/' . $filter_class_and_fun[0] . '.php';
+                    $controller_path = 'app/controllers/' . $router['folder'] . '/' . $filter_class_and_fun[0] . '.php';
                     // Controller name
                     $controller_name = $filter_class_and_fun[0];
                     //Funtion name
                     $funtion_name = $filter_class_and_fun[1];
                     if (file_exists($controller_path)) {
                         $folder = $router['folder'];
-                        $returned_controller = "app\http\\" . $folder . "\controllers\\" . $controller_name . "@" . $funtion_name;
-                        if (method_exists("app\http\\" . $folder . "\controllers\\" . $controller_name, $funtion_name)) {
+                        $returned_controller = "app\controllers\\" . $folder . "\\" . $controller_name . "@" . $funtion_name;
+                        if (method_exists("app\controllers\\" . $folder . "\\" . $controller_name, $funtion_name)) {
                             // get responce
                             parent::$method($router["path"], $returned_controller);
                         } else {

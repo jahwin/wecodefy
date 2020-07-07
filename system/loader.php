@@ -75,5 +75,4 @@ $whoops->register();
 //Cors
 require 'config/cors.php';
 // routes
-require 'system/dev/routes.php';
 require 'config/routes.php';

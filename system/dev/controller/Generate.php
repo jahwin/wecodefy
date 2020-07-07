@@ -21,7 +21,7 @@ class Generate
         // Check
         if ($controller && $controller_folder) {
             // Check or create controller file
-            $file = "app/http/{$folder_name}/controllers/" . $file_name . ".php";
+            $file = "app/controllers/{$folder_name}/" . $file_name . ".php";
             if (!file_exists($file)) {
                 $content = $this->getControllerContent($folder_name, $file_name);
                 file_put_contents($file, $content);
@@ -86,7 +86,7 @@ class Generate
     // Check if folder is exists if not create it
     public function checkControllerFolder($folder_name)
     {
-        $dir = "app/http/{$folder_name}/controllers";
+        $dir = "app/controllers/{$folder_name}";
         if (!file_exists($dir)) {
             mkdir($dir, 0777, true);
             chmod($dir, 0777);
@@ -117,7 +117,7 @@ class Generate
     public function getControllerContent($folder, $name)
     {
         return '<?php
-  namespace app\http\\' . $folder . '\controllers;
+  namespace app\controllers\\' . $folder . ';
 
   use system\library\Controller;
 
