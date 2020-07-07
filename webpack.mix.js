@@ -14,7 +14,7 @@ mix
 
 mix
     .js(
-        ["js/vue/main.js", "js/angular/polyfills.ts", "js/angular/main.ts", "js/react/main.js"],
-        "assets/js/main.js"
+        ["scheme/vue/main.js", "scheme/angular/polyfills.ts", "scheme/angular/main.ts", "scheme/react/main.js"],
+        "assets/scheme/main.js"
     ).setPublicPath('assets/')
     .disableNotifications();

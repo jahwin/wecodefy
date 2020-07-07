@@ -9,7 +9,7 @@ class Angular
         $responce = [];
         $input = input()->all();
         $name = $input['name'];
-        $dir = ROOT_FOLDER . "/js/angular";
+        $dir = ROOT_FOLDER . "/scheme/angular";
         $change_dir = chdir($dir);
         $command = ROOT_FOLDER . "/node_modules/.bin/ng generate component " . $name . " --skipTests=true";
         if ($change_dir) {
@@ -41,7 +41,7 @@ class Angular
         $responce = [];
         $input = input()->all();
         $name = $input['name'];
-        $dir = ROOT_FOLDER . "/js/angular";
+        $dir = ROOT_FOLDER . "/scheme/angular";
         $change_dir = chdir($dir);
         $command = ROOT_FOLDER . "/node_modules/.bin/ng generate service " . $name . " --skipTests=true";
         if ($change_dir) {

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
-		<title>Wecodefy app</title>
+		<title>Wecodefy</title>
 		<base href="{{'APP_URL' | env}}">
 		<meta name="theme-color" content="#000000"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" href="{{'APP_URL' | env}}assets/images/favicon.ico">
 		<style>
 			.wecodefy-widget {
 				display: flex;
@@ -15,7 +15,6 @@
 				padding-top: 30px;
 				padding-bottom: 30px;
 			}
-
 			.wecodefy-options {
 				display: flex;
 				align-items: center;
@@ -71,7 +70,7 @@
 			<img src="{{'APP_URL' | env}}assets/images/wecodefy.png" width="200" alt="">
 		</div>
 		<div class="wecodefy-options">
-			<a target="_brank" href="/dev-ui" class="wecodefy-btn">DEV MANAGER</a>
+			<a target="_brank" href="/dev/ui" class="wecodefy-btn">DEV MANAGER</a>
 			<a href="https://github.com/jahwin/wecodefy/wiki" class="wecodefy-btn">DOCUMENTATION</a>
 		</div>
 

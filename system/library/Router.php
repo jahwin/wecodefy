@@ -3,11 +3,8 @@
 namespace system\library;
 
 use Nette\Http\Response;
-use Pecee\Http\Request;
 use Pecee\SimpleRouter\SimpleRouter;
-use system\dev\exec\errorsExec;
-
-
+use system\dev\controller\errorsExec;
 
 /**
  * @desc this class will hold functions for routing
@@ -138,7 +135,7 @@ class Router extends SimpleRouter
                 Router::validate($router, 'options');
             }
         } else {
-            if (!_env('DEVELOPMENT',true) === 'true') {
+            if (!_env('DEVELOPMENT', true) === 'true') {
                 SimpleRouter::response()->httpCode(404);
                 exit;
             }

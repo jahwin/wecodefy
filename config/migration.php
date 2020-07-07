@@ -1,58 +1,41 @@
 <?php
 use Illuminate\Database\Schema\Blueprint;
 /**
-* --------------------------------------------
-* Setting up database
-* -------------------------------------------
-* Don't change this variable name
-*/
+ * --------------------------------------------
+ * Setting up database
+ * -------------------------------------------
+ * Don't change this variable name
+ */
 $db_up_migration = [
     [
         'key' => 1,
-		'table'=>'tb_client',
-		"todo" =>'create',
-        'run' => function( Blueprint $table ) {
-            $table->string( 'email' )->index();
-            $table->string( 'token' )->index();
+        'table' => 'tb_user',
+        "todo" => 'create',
+        'run' => function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
+            $table->string('password');
             $table->timestamps();
         }
         ,
-        'reason'=>'Creating tb_client table'
+        'reason' => 'Creating tb_user table',
     ],
-    [
-        'key' => 2,
-		'table'=>'tb_books',
-		"todo" =>'create',
-        'run' => function( Blueprint $table ) {
-            $table->string( 'name' )->index();
-            $table->timestamps();
-        }
-        ,
-        'reason'=>'Creating tb_books table'
-	]
 ];
 
 /**
-* --------------------------------------------
-* Rollback database
-* -------------------------------------------
-* Don't change this variable name
-*/
+ * --------------------------------------------
+ * Rollback database
+ * -------------------------------------------
+ * Don't change this variable name
+ */
 $db_down_migration = [
     [
         'key' => 1,
-        'table'=>'tb_client',
-        'todo' =>'delete',
+        'table' => 'tb_user',
+        'todo' => 'delete',
         'run' => 'drop',
-        'reason'=>'Removing tb_client table'
+        'reason' => 'Removing tb_user table',
     ],
-    [
-        'key' => 2,
-        'table'=>'tb_book',
-        'todo' =>'delete',
-        'run' => 'drop',
-        'reason'=>'Removing tb_book table'
-    ]
 ];
-
-?>

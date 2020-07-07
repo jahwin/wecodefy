@@ -1,21 +1,24 @@
 <?php
 namespace system\library;
 
-use system\dev\exec\errorsExec;
-use system\library\Views;
+use system\dev\controller\errorsExec;
 use system\library\Models;
+use system\library\Views;
+
 /**
-* @desc this class will hold functions for controllers
-* @author Abe Jahwin
-*/
+ * @desc this class will hold functions for controllers
+ * @author Abe Jahwin
+ */
 
-class Controller {
+class Controller
+{
     /**
-    * @desc Allow to init template engine
-    */
+     * @desc Allow to init template engine
+     */
 
-    public function __construct() {
-        if ( class_exists( 'system\library\Views' ) ) {
+    public function __construct()
+    {
+        if (class_exists('system\library\Views')) {
             $this->view = new Views();
         } else {
             $error = array(
@@ -24,9 +27,9 @@ class Controller {
                 'Dir' => 'system/library/views.php',
                 'Code' => '0002',
             );
-            errorsExec::show( $error );
+            errorsExec::show($error);
         }
-        if ( class_exists( 'system\library\Models' ) ) {
+        if (class_exists('system\library\Models')) {
             $this->models = new Models();
         } else {
             $error = array(
@@ -35,27 +38,29 @@ class Controller {
                 'Dir' => 'system/library/model.php',
                 'Code' => '0002',
             );
-            errorsExec::show( $error );
+            errorsExec::show($error);
         }
     }
     /**
-    * @desc Allow to load template
-    * @param string $folder - folder name to load template
-    * @param string $file- file path
-    * @param array $data - array of data to be used on template
-    * @return html - html page
-    */
+     * @desc Allow to load template
+     * @param string $folder - folder name to load template
+     * @param string $file- file path
+     * @param array $data - array of data to be used on template
+     * @return html - html page
+     */
 
-    public function render( $folder, $file, $data = [] ) {
-        return $this->view->display( $folder, $file, $data );
+    public function render($folder, $file, $data = [])
+    {
+        return $this->view->display($folder, $file, $data);
     }
     /**
-    * @desc Allow to load model
-    * @param string $model_name - model name
-    */
+     * @desc Allow to load model
+     * @param string $model_name - model name
+     */
 
-    public function loadModel( $model_name ) {
-        return  $this->models->init( $model_name );
+    public function loadModel($model_name)
+    {
+        return $this->models->init($model_name);
     }
 
 }

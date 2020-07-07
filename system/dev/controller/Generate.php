@@ -10,7 +10,7 @@ class Generate
     {
         $generate = input()->all();
         $folder_name = $generate['folder_name'];
-        $file_name = $generate['file_name'];
+        $file_name = ucfirst($generate['class_name']);
         $controller = $generate['controller'];
         $model = $generate['model'];
         $view = $generate['view'];
@@ -41,7 +41,7 @@ class Generate
         $model_folder = $this->checkModelFolder($folder_name);
 
         if ($model && $model_folder) {
-            // Check or create controller file
+            // Check or create model file
             $file = "app/models/" . $file_name . ".php";
             if (!file_exists($file)) {
                 $content = $this->getModelContent($folder_name, $file_name);
@@ -61,8 +61,8 @@ class Generate
 
         if ($view) {
             $view_folder = $this->checkViewFolder($folder_name, $file_name);
-            // Check or create controller file
-            $file = "app/http/" . $folder_name . "/views/" . $file_name . "/index.twig";
+            // Check or create view file
+            $file = "scheme/views/" . $folder_name . "/" . $file_name . "/index.twig";
             if (!file_exists($file)) {
                 $content = $this->getViewContent($folder_name, $file_name);
                 file_put_contents($file, $content);
@@ -106,7 +106,7 @@ class Generate
     // Check if view location folder exist
     public function checkViewFolder($folder_name, $file_name)
     {
-        $dir = "app/http/" . $folder_name . "/views/" . $file_name;
+        $dir = "scheme/views/" . $folder_name . "/" . $file_name;
         if (!file_exists($dir)) {
             mkdir($dir, 0777, true);
             chmod($dir, 0777);

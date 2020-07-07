@@ -4,7 +4,7 @@ export default {
     },
     methods: {
         $apiUrl(url) {
-            return this.$store.state.base_url + url;
+            return this.$store.state.api_base_url + url;
         }
     }
 };

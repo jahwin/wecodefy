@@ -3,8 +3,6 @@
  | Custom Webpack Config
  |--------------------------------------------------------------------------
  |
- | Custom Webpack Config for Angular
- |
  */
 
 let mix = require("laravel-mix");

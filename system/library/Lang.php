@@ -1,7 +1,7 @@
 <?php
 namespace system\library;
 
-use system\dev\exec\errorsExec;
+use system\dev\controller\errorsExec;
 use system\library\Cookies;
 use system\library\DB;
 
@@ -17,9 +17,9 @@ class Lang
     public static function init()
     {
 
-        if (_env('LANGUAGE_STORAGE','file') === 'file') {
-            self::CheckFile(_env('DEFAULT_LANGUAGE','en-us'));
-        } elseif (_env('LANGUAGE_STORAGE','database') === 'database') {
+        if (_env('LANGUAGE_STORAGE', 'file') === 'file') {
+            self::CheckFile(_env('DEFAULT_LANGUAGE', 'en-us'));
+        } elseif (_env('LANGUAGE_STORAGE', 'database') === 'database') {
             self::IsTableExist();
 
         }
@@ -50,39 +50,39 @@ class Lang
      */
     public static function Trans($text)
     {
-            
-            $locale = _env('DEFAULT_LANGUAGE','en-us');
-        
-            if (_env('LANGUAGE_STORAGE','file') === 'file') {
-                $keywords = null;
-                if (!file_exists('locale/' . $locale . '/lang.php')) {
-                    $error = array(
-                        'Type' => 'File missing',
-                        'Message' => "<b>" . $locale . "</b> locale is missing or incorrect typing, Try to create this way in locale/" . $locale . "/lang.php or correct locale name.",
-                        'Dir' => 'locale/' . $locale . '/',
-                        'Code' => '0001',
-                    );
-                    errorsExec::show($error);
-                } else {
-                    require_once 'locale/' . $locale . '/lang.php';
-                }
-                if (isset($keywords[$text])) {
-                    return $keywords[$text];
-                } else {
-                    self::SaveKeyword($keywords, $text);
-                    return $text;
-                }
-            } elseif (_env('LANGUAGE_STORAGE','database') === 'database') {
-                $length = DB::table("lang-keywords")->select('value')->where([['key', '=', $text], ['locale', '=', $locale]])->count();
-                if ($length > 0) {
-                    $data = DB::table("lang-keywords")->select('value')->where([['key', '=', $text], ['locale', '=', $locale]])->get();
-                    return $data[0]->value;
-                } else {
-                    self::SaveKeyword(null, $text);
-                }
 
+        $locale = _env('DEFAULT_LANGUAGE', 'en-us');
+
+        if (_env('LANGUAGE_STORAGE', 'file') === 'file') {
+            $keywords = null;
+            if (!file_exists('locale/' . $locale . '/lang.php')) {
+                $error = array(
+                    'Type' => 'File missing',
+                    'Message' => "<b>" . $locale . "</b> locale is missing or incorrect typing, Try to create this way in locale/" . $locale . "/lang.php or correct locale name.",
+                    'Dir' => 'locale/' . $locale . '/',
+                    'Code' => '0001',
+                );
+                errorsExec::show($error);
+            } else {
+                require_once 'locale/' . $locale . '/lang.php';
             }
-        
+            if (isset($keywords[$text])) {
+                return $keywords[$text];
+            } else {
+                self::SaveKeyword($keywords, $text);
+                return $text;
+            }
+        } elseif (_env('LANGUAGE_STORAGE', 'database') === 'database') {
+            $length = DB::table("lang-keywords")->select('value')->where([['key', '=', $text], ['locale', '=', $locale]])->count();
+            if ($length > 0) {
+                $data = DB::table("lang-keywords")->select('value')->where([['key', '=', $text], ['locale', '=', $locale]])->get();
+                return $data[0]->value;
+            } else {
+                self::SaveKeyword(null, $text);
+            }
+
+        }
+
     }
     /**
      * @desc Allow to save keyword in file or database
@@ -91,22 +91,22 @@ class Lang
      */
     public static function SaveKeyword($keywords, $text)
     {
-        if (_env('LANGUAGE_AUTO_SAVE','true') === "true") {
-            if (_env('LANGUAGE_STORAGE','file') === 'file') {
-            
-                $locale = _env('DEFAULT_LANGUAGE','en-us');
+        if (_env('LANGUAGE_AUTO_SAVE', 'true') === "true") {
+            if (_env('LANGUAGE_STORAGE', 'file') === 'file') {
+
+                $locale = _env('DEFAULT_LANGUAGE', 'en-us');
                 $keywords[$text] = $text;
                 $file = 'locale/' . $locale . '/lang.php';
                 file_put_contents($file,
                     '<?php
 $keywords = ' . var_export($keywords, true) . ';
 ?>');
-            } elseif (_env('LANGUAGE_STORAGE','database') === 'database') {
-              
-                $locale = _env('DEFAULT_LANGUAGE','en-us');
+            } elseif (_env('LANGUAGE_STORAGE', 'database') === 'database') {
+
+                $locale = _env('DEFAULT_LANGUAGE', 'en-us');
                 $key = $text;
                 $value = $text;
-                
+
                 DB::table('lang-keywords')->insert([
                     'key' => $key,
                     'value' => $value,
@@ -161,11 +161,11 @@ $keywords = ' . var_export($keywords, true) . ';
     public static function getLangIndex()
     {
         $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        if (_env('LANGUAGE_STORAGE','file') === 'file') {
+        if (_env('LANGUAGE_STORAGE', 'file') === 'file') {
             $lang_index = null;
             require 'config/lang.php';
             return $lang_index;
-        } elseif (_env('LANGUAGE_STORAGE','database') === 'database') {
+        } elseif (_env('LANGUAGE_STORAGE', 'database') === 'database') {
             $data = DB::table('lang-index')->get();
             return $data;
         }

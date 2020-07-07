@@ -5,7 +5,7 @@ namespace system\library;
  * @desc this class will hold functions for views
  * @author Abe Jahwin
  */
-use system\dev\exec\errorsExec;
+use system\dev\controller\errorsExec;
 
 class Views
 {
@@ -20,10 +20,10 @@ class Views
 
     public function display($folder, $file, $data)
     {
-        $file_path = 'app/http/' . $folder . '/views/' . $file;
+        $file_path = 'scheme/views/' . $folder . '/' . $file;
         if (file_exists($file_path)) {
             // *** Configure directories
-            $this->templeting_engine = new \Twig\Loader\FilesystemLoader('app/http/' . $folder . '/views/');
+            $this->templeting_engine = new \Twig\Loader\FilesystemLoader('scheme/views/' . $folder);
             if (_env('USE_CACHE', 'true') === 'true') {
                 $twig = new \Twig\Environment($this->templeting_engine, [
                     'cache' => 'system/cache/',

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <nav class="navigation">
-      <img alt="Vue logo" src="/wecodefy.png" />
+      <img alt="Vue logo" :src="$store.state.base_url+'assets/images/wecodefy.png'" />
       <br />
     </nav>
     <div class="dev-options">
@@ -48,8 +48,8 @@
                   </a-col>
                   <!-- File name -->
                   <a-col :span="12">
-                    <a-input placeholder="File name" v-model="generate.file_name" size="large">
-                      <a-icon slot="prefix" type="file" />
+                    <a-input placeholder="Class name" v-model="generate.class_name" size="large">
+                      <a-icon slot="prefix" type="codepen" />
                     </a-input>
                   </a-col>
                 </a-row>
@@ -121,6 +121,14 @@
                   @click="runSeeder()"
                   type="primary"
                 >Run seeder</a-button>
+              </li>
+              <li>
+                <a-button
+                  size="large"
+                  :loading="database.reverse_seeder_loading"
+                  @click="reverseSeeder()"
+                  type="primary"
+                >Reverse back seeder</a-button>
               </li>
             </ul>
           </a-col>
@@ -408,7 +416,7 @@ export default {
         console: [],
         loading: false,
         folder_name: "site",
-        file_name: "",
+        class_name: "",
         is: {
           controller: false,
           model: false,
@@ -419,7 +427,8 @@ export default {
         console: [],
         run_migration_loading: false,
         reverse_migration_loading: false,
-        run_seeder_loading: false
+        run_seeder_loading: false,
+        reverse_seeder_loading: false
       },
       angular: {
         console: [],
@@ -457,8 +466,8 @@ export default {
       let vm = this;
       if (vm.generate.folder_name) {
         if (/\s/.test(vm.generate.folder_name) == false) {
-          if (vm.generate.file_name) {
-            if (/\s/.test(vm.generate.file_name) == false) {
+          if (vm.generate.class_name) {
+            if (/\s/.test(vm.generate.class_name) == false) {
               if (
                 vm.generate.is.controller ||
                 vm.generate.is.model ||
@@ -467,7 +476,7 @@ export default {
                 vm.generate.loading = true;
                 var form_data = {
                   folder_name: vm.generate.folder_name,
-                  file_name: vm.generate.file_name,
+                  class_name: vm.generate.class_name,
                   controller: vm.generate.is.controller,
                   model: vm.generate.is.model,
                   view: vm.generate.is.view
@@ -479,6 +488,14 @@ export default {
                     response.data.forEach(item => {
                       vm.generate.console.push(item);
                     });
+                  })
+                  .catch(error => {
+                    console.log(error);
+                    let item = {
+                      status: "fail",
+                      message: "Something went wrong, Please Try again"
+                    };
+                    vm.generate.console.push(item);
                   });
               } else {
                 // No type selected
@@ -518,34 +535,85 @@ export default {
     runMigration() {
       let vm = this;
       vm.database.run_migration_loading = true;
-      this.axios.get(vm.$apiUrl("run-migration")).then(response => {
-        vm.database.run_migration_loading = false;
-        response.data.forEach(item => {
+      this.axios
+        .get(vm.$apiUrl("run-migration"))
+        .then(response => {
+          vm.database.run_migration_loading = false;
+          response.data.forEach(item => {
+            vm.database.console.push(item);
+          });
+        })
+        .catch(error => {
+          console.log(error);
+          let item = {
+            status: "fail",
+            message: "Something went wrong, Please Try again"
+          };
           vm.database.console.push(item);
         });
-      });
     },
     //Allow to reverse migration
     reverseMigration() {
       let vm = this;
       vm.reverse_migration_loading = true;
-      this.axios.get(vm.$apiUrl("reverse-migration")).then(response => {
-        vm.reverse_migration_loading = false;
-        response.data.forEach(item => {
+      this.axios
+        .get(vm.$apiUrl("reverse-migration"))
+        .then(response => {
+          vm.reverse_migration_loading = false;
+          response.data.forEach(item => {
+            vm.database.console.push(item);
+          });
+        })
+        .catch(error => {
+          console.log(error);
+          let item = {
+            status: "fail",
+            message: "Something went wrong, Please Try again"
+          };
           vm.database.console.push(item);
         });
-      });
     },
     //Run seeder
     runSeeder() {
       let vm = this;
       vm.database.run_seeder_loading = true;
-      this.axios.get(vm.$apiUrl("run-seeder")).then(response => {
-        vm.database.run_seeder_loading = false;
-        response.data.forEach(item => {
+      this.axios
+        .get(vm.$apiUrl("run-seeder"))
+        .then(response => {
+          vm.database.run_seeder_loading = false;
+          response.data.forEach(item => {
+            vm.database.console.push(item);
+          });
+        })
+        .catch(error => {
+          console.log(error);
+          let item = {
+            status: "fail",
+            message: "Something went wrong, Please Try again"
+          };
           vm.database.console.push(item);
         });
-      });
+    },
+    //Allow to reverse seeder
+    reverseSeeder() {
+      let vm = this;
+      vm.reverse_seeder_loading = true;
+      vm.axios
+        .get(vm.$apiUrl("reverse-seeder"))
+        .then(response => {
+          vm.database.reverse_seeder_loading = false;
+          response.data.forEach(item => {
+            vm.database.console.push(item);
+          });
+        })
+        .catch(error => {
+          console.log(error);
+          let item = {
+            status: "fail",
+            message: "Something went wrong, Please Try again"
+          };
+          vm.database.console.push(item);
+        });
     },
     //generate component
     generateComponent() {
@@ -563,6 +631,14 @@ export default {
               response.data.forEach(item => {
                 vm.angular.console.push(item);
               });
+            })
+            .catch(error => {
+              console.log(error);
+              let item = {
+                status: "fail",
+                message: "Something went wrong, Please Try again"
+              };
+              vm.angular.console.push(item);
             });
         } else {
           this.$error({
@@ -594,6 +670,14 @@ export default {
               response.data.forEach(item => {
                 vm.angular.console.push(item);
               });
+            })
+            .catch(error => {
+              console.log(error);
+              let item = {
+                status: "fail",
+                message: "Something went wrong, Please Try again"
+              };
+              vm.angular.console.push(item);
             });
         } else {
           this.$error({
@@ -628,6 +712,14 @@ export default {
                   response.data.forEach(item => {
                     vm.vue.console.push(item);
                   });
+                })
+                .catch(error => {
+                  console.log(error);
+                  let item = {
+                    status: "fail",
+                    message: "Something went wrong, Please Try again"
+                  };
+                  vm.vue.console.push(item);
                 });
             } else {
               this.$error({
@@ -675,6 +767,14 @@ export default {
                   response.data.forEach(item => {
                     vm.react.console.push(item);
                   });
+                })
+                .catch(error => {
+                  console.log(error);
+                  let item = {
+                    status: "fail",
+                    message: "Something went wrong, Please Try again"
+                  };
+                  vm.react.console.push(item);
                 });
             } else {
               this.$error({
@@ -707,12 +807,22 @@ export default {
     runBuild() {
       let vm = this;
       vm.build.loading = true;
-      this.axios.get(vm.$apiUrl("build-js")).then(response => {
-        vm.build.loading = false;
-        response.data.forEach(item => {
+      this.axios
+        .get(vm.$apiUrl("build-js"))
+        .then(response => {
+          vm.build.loading = false;
+          response.data.forEach(item => {
+            vm.build.console.push(item);
+          });
+        })
+        .catch(error => {
+          console.log(error);
+          let item = {
+            status: "fail",
+            message: "Something went wrong, Please Try again"
+          };
           vm.build.console.push(item);
         });
-      });
     }
   }
 };

@@ -6,15 +6,15 @@ namespace system\library;
  * Time: 10:52
  */
 use Illuminate\Database\Capsule\Manager as Database;
-use system\dev\exec\errorsExec;
+use system\dev\controller\errorsExec;
 
 $capsule = new Database;
 $conn = $capsule->addConnection([
     'driver' => 'mysql',
-    'host' => _env('DB_HOST','127.0.0.1'),
-    'database' => _env('DB_NAME','wecodefy'),
-    'username' => _env('DB_USER','root'),
-    'password' => _env('DB_PASS','')
+    'host' => _env('DB_HOST', '127.0.0.1'),
+    'database' => _env('DB_NAME', 'wecodefy'),
+    'username' => _env('DB_USER', 'root'),
+    'password' => _env('DB_PASS', ''),
 ]);
 $capsule->setAsGlobal();
 $capsule->bootEloquent();

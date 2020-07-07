@@ -9,10 +9,10 @@ class React
         $input = input()->all();
         $file_name = $input['file_name'];
         $folder_name = $input['folder_name'];
-        $dir = ROOT_FOLDER . "/js/react";
-        $this->checkFolder("js/react");
+        $dir = ROOT_FOLDER . "/scheme/react";
+        $this->checkFolder("scheme/react");
         $command = ROOT_FOLDER . "/node_modules/.bin/rg component " . $file_name . " -d ./" . $folder_name . " -f";
-        if (!file_exists("js/react/" . $folder_name . '/' . $file_name . '/' . $file_name . ".js")) {
+        if (!file_exists("scheme/react/" . $folder_name . '/' . $file_name . '/' . $file_name . ".js")) {
             $change_dir = chdir($dir);
             $info = shell_exec('export PATH="/usr/local/bin/" ; ' . $command . " 2>&1");
             if ($info) {

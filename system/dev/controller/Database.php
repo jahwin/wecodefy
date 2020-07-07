@@ -23,7 +23,13 @@ class Database
     public function runSeeder()
     {
         $seeder = new Seeder();
-        $responce = $seeder->init();
+        $responce = $seeder->up();
+        echo json_encode($responce);
+    }
+    public function reverseSeeder()
+    {
+        $seeder = new Seeder();
+        $responce = $seeder->down();
         echo json_encode($responce);
     }
 }

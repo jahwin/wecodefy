@@ -1,6 +1,6 @@
 <?php
 
-use system\dev\exec\errorsExec;
+use system\dev\controller\errorsExec;
 ?>
     <html>
 
@@ -15,7 +15,7 @@ use system\dev\exec\errorsExec;
                 margin: 0;
                 overflow: hidden;
             }
-            
+
             .body_wrapper {
                 position: fixed;
                 left: 0;
@@ -25,7 +25,7 @@ use system\dev\exec\errorsExec;
                 background: #fff;
                 z-index: 9999999999999999999999999999999999999999999999999999999999999999999;
             }
-            
+
             .error_nav {
                 position: fixed;
                 left: 0;
@@ -39,29 +39,29 @@ use system\dev\exec\errorsExec;
                 align-items: center;
                 padding-right: 20px;
             }
-            
+
             .error-brand-widget {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 width: 300px;
             }
-            
+
             .error_logo img {
                 width: 73px;
             }
-            
+
             .error_code {
                 color: #000;
             }
-            
+
             .error_body {
                 width: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
-            
+
             .error-widget {
                 width: 700px;
                 height: 250px;
@@ -76,14 +76,14 @@ use system\dev\exec\errorsExec;
                 justify-content: space-between;
                 box-shadow: 0px 2px 1px #e0e0e0;
             }
-            
+
             .error-dir {
                 height: 100px;
                 border-top: 4px solid #08565c;
                 color: #4d4d4d;
                 padding-top: 11px;
             }
-            
+
             .error-message {
                 color: #000000;
                 font-size: 20px;

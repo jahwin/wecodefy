@@ -5,10 +5,20 @@ import Home from '../views/Home.vue'
 Vue.use(VueRouter)
 
 const routes = [{
-    path: '/dev-ui',
-    name: 'home',
-    component: Home
-}, ]
+        path: '/dev',
+        redirect: '/dev/ui'
+    },
+    {
+        path: '/dev/ui/*',
+        redirect: '/dev/ui'
+    },
+    {
+        path: '/dev/ui',
+        name: 'home',
+        component: Home
+    }
+
+]
 
 const router = new VueRouter({
     mode: 'history',
