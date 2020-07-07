@@ -3,9 +3,9 @@
 <p align="center"><img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/wecodefy.png" width="200"></p>
 
 ## About Wecodefy
-<p>Wecodefy is framework for making web application, It can be used to create Rest API and also you can build frontend by using modern javascript framework like Angular, React , Vue. if you are not familiar with those js framework you can use Twig templating engine.</p>
+<p>Wecodefy is framework for making web application,you can build frontend by using modern javascript framework both Angular, React and Vue at the sametime but it is option you can choose one of them. Also it can be used to create Rest API. if you are not familiar with those js framework you can use Twig templating engine.</p>
 
-<p>This framework combine Angular, Vue ,React</p>
+<p>This framework combine Angular, Vue and React</p>
 <p>
 <img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/react_logo.svg" width="80">
 <img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/vue_logo.png" style="margin-right:10px" width="50">
@@ -126,7 +126,11 @@ npm -v
 
 
 ### Servers that Wecodefy use
-<p>You can run Wecodefy framework by using XAMP , WAMP, LAMP or PHP serve</p>
+<p>You can run Wecodefy framework by using XAMP , WAMP, LAMP or PHP server</p>
+
+ `Note:` For those who will user XAMP, WAMP, LAMP make sure to set local domain on your wecodefy project, If you don't know how to do it please refer to this 
+ <a target="_brank" href="https://phpcodez.com/xamp-change-localhost-to-domain/" class="wecodefy-btn">link </a>
+
 <p>Then after checking everything is fine, clone this  framework or download it from here </p>
 <p>
 <a target="_brank" href="https://github.com/jahwin/wecodefy/archive/v1.0.zip" class="wecodefy-btn">DOWNLOAD </a>
@@ -480,7 +484,7 @@ For more information about Query Builder refer to <a href="https://laravel.com/d
 Before use below url make sure your app is in development mode [.env]
 
 ```
-http://{app_url}/dev-ui
+http://{app_url}/dev/ui
 ```
 <p>
 <img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/dev-tool.png" width="600">
@@ -593,7 +597,225 @@ Let's understand the above code:
     - If you want create or update table you have to use  Blueprint function initialization
 - [x] <b>reason:</b> This is the reason you are making that migration.
 
-For more about creating or updating table columns refer to <a href="https://laravel.com/docs/5.8/migrations#creating-columns"> this link </a>
+## Creating or updating table columns rules
+
+### Available Column Types
+This is a variety of column types that you may specify when building your tables:
+```php
+$table->bigIncrements('id');	//Auto-incrementing UNSIGNED BIGINT (primary key) equivalent column.
+
+$table->bigInteger('votes');	//BIGINT equivalent column.
+
+$table->binary('data');	//BLOB equivalent column.
+
+$table->boolean('confirmed');	//BOOLEAN equivalent column.
+
+$table->char('name', 100);	//CHAR equivalent column with an optional length.
+
+$table->date('created_at');	//DATE equivalent column.
+
+$table->dateTime('created_at');	//DATETIME equivalent column.
+
+$table->dateTimeTz('created_at');	//DATETIME (with timezone) equivalent column.
+
+$table->decimal('amount', 8, 2);	//DECIMAL equivalent column with a precision (total digits) and scale (decimal digits).
+
+$table->double('amount', 8, 2);	//DOUBLE equivalent column with a precision (total digits) and scale (decimal digits).
+
+$table->enum('level', ['easy', 'hard']); ENUM equivalent column.
+
+$table->float('amount', 8, 2);	//FLOAT equivalent column with a precision (total digits) and scale (decimal digits).
+
+$table->geometry('positions');	//GEOMETRY equivalent column.
+
+$table->geometryCollection('positions');	//GEOMETRYCOLLECTION equivalent column.
+
+$table->increments('id');	//Auto-incrementing UNSIGNED INTEGER (primary key) equivalent column.
+
+$table->integer('votes');	//INTEGER equivalent column.
+
+$table->ipAddress('visitor');	//IP address equivalent column.
+
+$table->json('options');	//JSON equivalent column.
+
+$table->jsonb('options');	//JSONB equivalent column.
+
+$table->lineString('positions');	//LINESTRING equivalent column.
+
+$table->longText('description');	//LONGTEXT equivalent column.
+
+$table->macAddress('device');	//MAC address equivalent column.
+
+$table->mediumIncrements('id');	//Auto-incrementing UNSIGNED MEDIUMINT (primary key) equivalent column.
+
+$table->mediumInteger('votes');	//MEDIUMINT equivalent column.
+
+$table->mediumText('description');	//MEDIUMTEXT equivalent column.
+
+$table->morphs('taggable');	//Adds taggable_id UNSIGNED BIGINT and taggable_type VARCHAR equivalent columns.
+
+$table->uuidMorphs('taggable');	//Adds taggable_id CHAR(36) and taggable_type VARCHAR(255) UUID equivalent columns.
+
+$table->multiLineString('positions');	//MULTILINESTRING equivalent column.
+
+$table->multiPoint('positions');	//MULTIPOINT equivalent column.
+
+$table->multiPolygon('positions');	//MULTIPOLYGON equivalent column.
+
+$table->nullableMorphs('taggable');	//Adds nullable versions of morphs() columns.
+
+$table->nullableUuidMorphs('taggable');	//Adds nullable versions of uuidMorphs() columns.
+
+$table->nullableTimestamps();	//Alias of timestamps() method.
+
+$table->point('position');	//POINT equivalent column.
+
+$table->polygon('positions');	//POLYGON equivalent column.
+
+$table->rememberToken();	//Adds a nullable remember_token VARCHAR(100) equivalent column.
+
+$table->set('flavors', ['strawberry', 'vanilla']);	//SET equivalent column.
+
+$table->smallIncrements('id');	//Auto-incrementing UNSIGNED SMALLINT (primary key) equivalent column.
+
+$table->smallInteger('votes');	//SMALLINT equivalent column.
+
+$table->softDeletes();	//Adds a nullable deleted_at TIMESTAMP equivalent column for soft deletes.
+
+$table->softDeletesTz();	//Adds a nullable deleted_at TIMESTAMP (with timezone) equivalent column for soft deletes.
+
+$table->string('name', 100);	//VARCHAR equivalent column with a optional length.
+
+$table->text('description');	//TEXT equivalent column.
+
+$table->time('sunrise');	//TIME equivalent column.
+
+$table->timeTz('sunrise');	//TIME (with timezone) equivalent column.
+
+$table->timestamp('added_on');	//TIMESTAMP equivalent column.
+
+$table->timestampTz('added_on');	//TIMESTAMP (with timezone) equivalent column.
+
+$table->timestamps();	//Adds nullable created_at and updated_at TIMESTAMP equivalent columns.
+
+$table->timestampsTz();	//Adds nullable created_at and updated_at TIMESTAMP (with timezone) equivalent columns.
+
+$table->tinyIncrements('id');	//Auto-incrementing UNSIGNED TINYINT (primary key) equivalent column.
+
+$table->tinyInteger('votes');	//TINYINT equivalent column.
+
+$table->unsignedBigInteger('votes');	//UNSIGNED BIGINT equivalent column.
+
+$table->unsignedDecimal('amount', 8, 2);	//UNSIGNED DECIMAL equivalent column with a precision (total digits) and scale (decimal digits).
+
+$table->unsignedInteger('votes');	//UNSIGNED INTEGER equivalent column.
+
+$table->unsignedMediumInteger('votes');	//UNSIGNED MEDIUMINT equivalent column.
+
+$table->unsignedSmallInteger('votes');	//UNSIGNED SMALLINT equivalent column.
+
+$table->unsignedTinyInteger('votes');	//UNSIGNED TINYINT equivalent column.
+
+$table->uuid('id');	//UUID equivalent column.
+
+$table->year('birth_year');	//YEAR equivalent column.
+
+```
+
+### Column Modifiers
+In addition to the column types listed above, there are several column "modifiers" you may use while adding a column to a database table. For example, to make the column "nullable", you may use the nullable method:
+```php
+$table->string('first_name')->nullable();
+```
+Below is a list of all the available column modifiers.
+
+```php
+->after('column')	//Place the column "after" another column (MySQL)
+
+->autoIncrement()	//Set INTEGER columns as auto-increment (primary key)
+
+->charset('utf8')	//Specify a character set for the column (MySQL)
+
+->collation('utf8_unicode_ci')	//Specify a collation for the column (MySQL/PostgreSQL/SQL Server)
+
+->comment('my comment')	//Add a comment to a column (MySQL/PostgreSQL)
+
+->default($value)	//Specify a "default" value for the column
+
+->first()	//Place the column "first" in the table (MySQL)
+
+->nullable($value = true)	//Allows (by default) NULL values to be inserted into the column
+
+->storedAs($expression)	//Create a stored generated column (MySQL)
+
+->unsigned()	//Set INTEGER columns as UNSIGNED (MySQL)
+
+->useCurrent()	//Set TIMESTAMP columns to use CURRENT_TIMESTAMP as default value
+
+->virtualAs($expression)	//Create a virtual generated column (MySQL)
+```
+### Modifying Columns
+The ```change``` method allows you to modify some existing column types to a new type or modify the column's attributes. 
+
+```php
+$table->string('name', 50)->change(); // Change size of column
+
+$table->string('name', 50)->nullable()->change(); // Change column to be nullable
+
+$table->renameColumn('from', 'to'); // Rename column
+
+$table->dropColumn('votes'); // Drop column
+
+$table->dropColumn(['votes', 'avatar', 'location']); //Drop multiple columns from a table by passing an array of column names 
+```
+
+### Creating Indexes
+To create the index, we can chain the unique method onto the column definition:
+```php
+ $table->string('email')->unique(); // Create column with index
+
+ $table->index(['student_id', 'start_at']); // Create index on multiple columns you have created
+
+$table->primary('id');	// Adds a primary key.
+
+$table->primary(['id', 'parent_id']);	// Adds composite keys.
+
+$table->unique('email');	// Adds a unique index.
+
+$table->index('state');	// Adds a plain index.
+
+```
+
+### Dropping Indexes
+To drop an index, you must specify the index's name. 
+```php
+$table->dropPrimary('users_id_primary');	//Drop a primary key from the "users" table.
+
+$table->dropUnique('users_email_unique');	//Drop a unique index from the "users" table.
+
+$table->dropIndex('user_state_index');	//Drop a basic index from the "user" table.
+ ```
+
+### Foreign Key Constraints
+wecodefy provides support for creating foreign key constraints, which are used to force referential integrity at the database level. For example, let's define a user_id column on the posts table that references the id column on a users table
+
+```php
+$table->unsignedBigInteger('user_id');
+$table->foreign('user_id')->references('id')->on('users');
+```
+
+You may also specify the desired action for the "on delete" and "on update" properties of the constraint:
+```php
+$table->foreign('user_id')
+      ->references('id')->on('users')
+      ->onDelete('cascade');
+```
+To drop a foreign key, you may use the dropForeign method. Foreign key constraints use the same naming convention as indexes. So, we will concatenate the table name and the columns in the constraint then suffix the name with "_foreign":
+
+```php
+$table->dropForeign('posts_user_id_foreign');
+```
+
 
 # Seeding
 
@@ -618,17 +840,18 @@ $generate = Factory::create();
 */
 $database_seeder = [
     [
-        'table' => 'user',
+        'key' => 1,
+        'table' => 'tb_user',
         'rows' => 10,
-        'fields'=> function() use($generate){
-            return  [
-                'first_name' =>   $generate->name,
-                'last_name'=>   $generate->name,
-                'email' =>   $generate->email,
-                'password' =>  $generate->password,
+        'fields' => function () use ($generate) {
+            return [
+                'first_name' => $generate->name,
+                'last_name' => $generate->name,
+                'email' => $generate->email,
+                'password' => $generate->password,
             ];
-        }
-    ]
+        },
+    ],
 ];
 ?>
 ```
@@ -872,7 +1095,7 @@ $database_seeder = [
 Before use this url make sure your app is in development mode in `.env` file
 
 ```
-http://{app_url}/dev-ui
+http://{app_url}/dev/ui
 ```
 <p>
 <img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/dev_database_section.png" width="600">
@@ -1185,7 +1408,7 @@ js/angular
 So then you can start code your app. if you want to generate some components or services you can use Dev management tool.
 before use this url make sure your app is in development mode [.env]
 ```
-http://{app_url}/dev-ui
+http://{app_url}/dev/ui
 ```
 <p>
 <img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/angular_dev_tool.png" width="600">
@@ -1202,7 +1425,7 @@ So then you can start code your app. if you want to generate some components you
 before use this url make sure your app is in development mode [.env]
 
 ```
-http://{app_url}/dev-ui
+http://{app_url}/dev/ui
 ```
 
 <p>
@@ -1220,7 +1443,7 @@ js/react
 So then you can start code your app. if you want to generate some components you can use Dev management tool.
 before use this url make sure your app is in development mode [.env]
 ```
-http://{app_url}/dev-ui
+http://{app_url}/dev/ui
 ```
 <p>
 <img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/react_dev_tool.png" width="600">
@@ -1249,7 +1472,7 @@ You can also build for production without command by using Dev Management Tool.
 </p>
 
 ---
-Thank you for taking your time and read all of this, Some documentation content come from outside packages docs.<br>
+Thank you for taking your time and read all of this, Some documentation content come from outside packages docs and website.<br>
 Have good job. Make your job done and fast.
 
 ----
