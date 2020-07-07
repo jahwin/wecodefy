@@ -490,8 +490,8 @@ export default {
                     });
                   })
                   .catch(error => {
-                    console.log(error);
                     let item = {
+                      error: error,
                       status: "fail",
                       message: "Something went wrong, Please Try again"
                     };
@@ -544,8 +544,8 @@ export default {
           });
         })
         .catch(error => {
-          console.log(error);
           let item = {
+            error: error,
             status: "fail",
             message: "Something went wrong, Please Try again"
           };
@@ -565,8 +565,8 @@ export default {
           });
         })
         .catch(error => {
-          console.log(error);
           let item = {
+            error: error,
             status: "fail",
             message: "Something went wrong, Please Try again"
           };
@@ -586,8 +586,8 @@ export default {
           });
         })
         .catch(error => {
-          console.log(error);
           let item = {
+            error: error,
             status: "fail",
             message: "Something went wrong, Please Try again"
           };
@@ -607,8 +607,8 @@ export default {
           });
         })
         .catch(error => {
-          console.log(error);
           let item = {
+            error: error,
             status: "fail",
             message: "Something went wrong, Please Try again"
           };
@@ -633,8 +633,8 @@ export default {
               });
             })
             .catch(error => {
-              console.log(error);
               let item = {
+                error: error,
                 status: "fail",
                 message: "Something went wrong, Please Try again"
               };
@@ -672,8 +672,8 @@ export default {
               });
             })
             .catch(error => {
-              console.log(error);
               let item = {
+                error: error,
                 status: "fail",
                 message: "Something went wrong, Please Try again"
               };
@@ -714,8 +714,8 @@ export default {
                   });
                 })
                 .catch(error => {
-                  console.log(error);
                   let item = {
+                    error: error,
                     status: "fail",
                     message: "Something went wrong, Please Try again"
                   };
@@ -769,8 +769,8 @@ export default {
                   });
                 })
                 .catch(error => {
-                  console.log(error);
                   let item = {
+                    error: error,
                     status: "fail",
                     message: "Something went wrong, Please Try again"
                   };
@@ -816,8 +816,8 @@ export default {
           });
         })
         .catch(error => {
-          console.log(error);
           let item = {
+            error: error,
             status: "fail",
             message: "Something went wrong, Please Try again"
           };
