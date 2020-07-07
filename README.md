@@ -25,7 +25,7 @@ This tool will also able to generate Angular, Vue, React components, Then at end
 <p>We have made this documentation to be very simple to be understood even by those with little programming proficiency who want to make applications</p>
 
 # Table of content
-  * [Getting started :man_technologist:](#getting-started--man-technologist-)
+  * [Getting started](#getting-started--man-technologist-)
       - [Requirement](#requirement)
       - [Installation](#installation)
     + [Servers that Wecodefy use](#servers-that-wecodefy-use)
@@ -41,27 +41,35 @@ This tool will also able to generate Angular, Vue, React components, Then at end
 - [Database](#database)
   * [Database connection](#database-connection)
   * [Database migration](#database-migration)
+  * [Creating or updating table columns rules](#creating-or-updating-table-columns-rules)
+    + [Available Column Types](#available-column-types)
+    + [Column Modifiers](#column-modifiers)
+    + [Modifying Columns](#modifying-columns)
+    + [Creating Indexes](#creating-indexes)
+    + [Dropping Indexes](#dropping-indexes)
+    + [Foreign Key Constraints](#foreign-key-constraints)
 - [Seeding](#seeding)
   * [This is a list of generator](#this-is-a-list-of-generator)
-        * [`Basic generator`](#-basic-generator-)
-        * [`Lorem generator`](#-lorem-generator-)
-        * [`en_US Person generator`](#-en-us-person-generator-)
-        * [`en_US Address generator`](#-en-us-address-generator-)
-        * [`en_US PhoneNumber generator`](#-en-us-phonenumber-generator-)
-        * [`en_US Company generator`](#-en-us-company-generator-)
-        * [`en_US Text generator`](#-en-us-text-generator-)
-        * [`DateTime generator`](#-datetime-generator-)
-        * [`Internet generator`](#-internet-generator-)
-        * [`UserAgent generator`](#-useragent-generator-)
-        * [`Payment generator`](#-payment-generator-)
-        * [`Color generator`](#-color-generator-)
-        * [`File  generator`](#-file--generator-)
-        * [`Image generator`](#-image-generator-)
-        * [`Uuid  generator`](#-uuid--generator-)
-        * [`Barcode generator`](#-barcode-generator-)
-        * [`Miscellaneous generator`](#-miscellaneous-generator-)
-        * [`Biased generator`](#-biased-generator-)
-        * [`HtmlLorem generator`](#-htmllorem-generator-)
+    + [Basic generator](#-basic-generator-)
+    + [Lorem generator](#-lorem-generator-)
+    + [en_US Person generator](#-en-us-person-generator-)
+    + [en_US Address generator](#-en-us-address-generator-)
+    + [en_US PhoneNumber generator](#-en-us-phonenumber-generator-)
+    + [en_US Company generator](#-en-us-company-generator-)
+    + [en_US Text generator](#-en-us-text-generator-)
+    + [DateTime generator](#-datetime-generator-)
+    + [Internet generator](#-internet-generator-)
+    + [UserAgent generator](#-useragent-generator-)
+    + [Payment generator](#-payment-generator-)
+    + [Color generator](#-color-generator-)
+    + [File  generator](#-file--generator-)
+    + [Image generator](#-image-generator-)
+    + [Uuid  generator](#-uuid--generator-)
+    + [Barcode generator](#-barcode-generator-)
+    + [Miscellaneous generator](#-miscellaneous-generator-)
+    + [Biased generator](#-biased-generator-)
+    + [HtmlLorem generator](#-htmllorem-generator-)
+- [You can also run migration and seeding by using Dev Management Tool](#you-can-also-run-migration-and-seeding-by-using-dev-management-tool)
 - [Lets talk about some important functionality](#lets-talk-about-some-important-functionality)
   * [Cookies](#cookies)
   * [Session](#session)
@@ -84,10 +92,14 @@ This tool will also able to generate Angular, Vue, React components, Then at end
   * [Responce](#responce)
   * [.env](#env)
 - [Let's talk about JS framework](#let-s-talk-about-js-framework)
-  * [`Angular`](#-angular-)
-  * [`Vue`](#-vue-)
-  * [`React`](#-react-)
+  * [Angular](#-angular-)
+  * [Vue](#-vue-)
+  * [React](#-react-)
   * [JSBuild](#jsbuild)
+- [Contributing](#contributing)
+- [Security Vulnerabilities](#security-vulnerabilities)
+- [License](#license)
+
 
 ## Getting started :man_technologist:
 <p>
@@ -229,7 +241,7 @@ $routes = [
 <b>folder:</b> key in array this where your will put folder name where controller is located.
 
 ```
-app/http/[folder name]/controllers/home.php
+app/controllers/[folder name]/home.php
 ```
 That means you have to use folder name based on folder of your controller are saved to.
 
@@ -317,7 +329,7 @@ class AuthMiddleware implements IMiddleware
 <p>This is were you will put your business logics, see directory below to see were it can be created manual.</p>
 
 ```
-app/http/[folder name]/controllers/
+app/controllers/[folder name]
 ```
 
 This is example of how it look like:
@@ -329,7 +341,7 @@ Home.php
 
 ```php
 <?php
-namespace app\http\foldername\controllers;
+namespace app\controllers\[foldername];
 
 use system\library\Controller;
 
@@ -344,7 +356,7 @@ class Home extends Controller
     public function welcome()
     {
         $data = array("name"=>"Hello world");
-        // Load template from `app/http/folder name/views/home/index.twig`
+        // Load template from `app/scheme/views/[folder_name]/home/index.twig`
         return $this->render('folder name', 'home/index.twig', $data);
     }
 
@@ -357,7 +369,7 @@ Replace `folder name` with any folder your controller located.
 <p>This is were you will put your design thinking.</p>
 
 ```
-app/http/[folder name]/views/
+app/scheme/views/[folder_name]/
 ```
 
 This is example of how it look like:
@@ -1403,7 +1415,7 @@ _env($value,$default_value)
 ## `Angular`
 You can start using this angular framework in the following location:
 ```
-js/angular
+scheme/angular
 ```
 So then you can start code your app. if you want to generate some components or services you can use Dev management tool.
 before use this url make sure your app is in development mode [.env]
@@ -1419,7 +1431,7 @@ For more information about using angular js framework refer to <a target="_brank
 ## `Vue`
 You can start using this Vue framework in the following location:
 ```
-js/vue
+scheme/vue
 ```
 So then you can start code your app. if you want to generate some components you can use Dev management tool.
 before use this url make sure your app is in development mode [.env]
@@ -1438,7 +1450,7 @@ For more information about using vue js framework refer to <a target="_brank" hr
 ## `React`
 You can start using this React framework in the following location:
 ```
-js/react
+scheme/react
 ```
 So then you can start code your app. if you want to generate some components you can use Dev management tool.
 before use this url make sure your app is in development mode [.env]
@@ -1472,7 +1484,7 @@ You can also build for production without command by using Dev Management Tool.
 </p>
 
 ---
-Thank you for taking your time and read all of this, Some documentation content come from outside packages docs and website.<br>
+Thank you for taking your time and read all of this, Some documentation content come from outside packages docs and other websites.<br>
 Have good job. Make your job done and fast.
 
 ----
