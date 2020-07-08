@@ -153,11 +153,30 @@ npm -v
 
 <p>Then after checking everything is fine, you have two option to get started to this framework: </p>
 
+---
+
 `1:` USING COMPOSER<br>
 Paste this command to create blog project
+
 ```
 composer create-project jahwin/wecodefy Blog
 ```
+
+This command will set everything for you, then navigate to your project folder Ex: `cd Blog` and run this command to start server
+
+``` 
+php run serve
+```
+
+After running above command you will get project link (http://127.0.0.1:8000/)<br>
+`Note:` Make sure no other apps which are using 8000 or set your own port by running this command.
+
+``` 
+php run serve 8001
+```
+
+---
+
 `2:` USING DOWNLOAD OPTION<br>
 Click on link below to download framework zip file
 <p>
@@ -186,12 +205,18 @@ php run serve
 ```
 
 After running above command you will get project link (http://127.0.0.1:8000/)<br>
-`Note:` Make sure no other apps witch are using that port.
+`Note:` Make sure no other apps which are using 8000 or set your own port by running this command.
+
+``` 
+php run serve 8001
+```
 
 For other who are using wamp,xamp,lamp they can access it by there configured local domain<br>
 `Ex:websitename.dev`
 
-<p>After running your project you will get Starter page we mentioned above.</p>
+---
+
+<p>After running your project you will get starter page we mentioned above.</p>
 
 ## Lets talk about wecodefy structure
 <p>
