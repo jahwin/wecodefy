@@ -16,8 +16,8 @@ if (isset($argv[2])) {
     $port = $argv[2];
     if (is_numeric($port)) {
         if (isPort('127.0.0.1', $port)) {
-            shell_exec("php -S 127.0.0.1:" . $port);
             echo "You app is running on: http://127.0.0.1:" . $port . " \n\n";
+            shell_exec("php -S 127.0.0.1:" . $port);
         } else {
             echo "127.0.0.1:" . $port . " is being used by other app \n\n";
         }
@@ -28,8 +28,8 @@ if (isset($argv[2])) {
     if ($argv[1] == "serve") {
         $port = 8000;
         if (isPort('127.0.0.1', $port)) {
-            shell_exec("php -S 127.0.0.1:" . $port);
             echo "You app is running on: http://127.0.0.1:" . $port . " \n\n";
+            shell_exec("php -S 127.0.0.1:" . $port);
         } else {
             echo "127.0.0.1:" . $port . " is being used by other app, Try 'php run serve 8050' \n\n";
         }
