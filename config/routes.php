@@ -45,7 +45,7 @@ $routes = [
  * ------------------------------
  */
 $route_condition = [
-    'ENABLED' => true,
+    'ENABLED' => false,
     'ALL_TO' => [
         'folder' => 'site',
         'return' => 'Home@welcome',
