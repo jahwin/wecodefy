@@ -2,6 +2,13 @@
 
 <p align="center"><img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/wecodefy.png" width="200"></p>
 
+<p align="center">
+<a href="https://packagist.org/packages/jahwin/wecodefy"><img src="https://poser.pugx.org/jahwin/wecodefy/downloads" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/jahwin/wecodefy"><img src="https://poser.pugx.org/jahwin/wecodefy/v" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/jahwin/wecodefy"><img src="https://poser.pugx.org/jahwin/wecodefy/v/unstable" alt="Latest Unstable Version"></a>
+<a href="https://packagist.org/packages/jahwin/wecodefy"><img src="https://poser.pugx.org/jahwin/wecodefy/license" alt="License"></a>
+</p>
+
 ## About Wecodefy
 <p>Wecodefy is framework for making web application,you can build frontend by using modern javascript framework both Angular, React and Vue at the sametime but it is option you can choose one of them. Also it can be used to create Rest API. if you are not familiar with those js framework you can use Twig templating engine.</p>
 
