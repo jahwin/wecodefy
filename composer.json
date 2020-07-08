@@ -20,19 +20,18 @@
         "fzaninotto/faker": "^1.9",
         "nette/http": "^3.0",
         "vlucas/phpdotenv": "^4.1",
-        "filp/whoops": "^2.7",
-        "slowprog/composer-copy-file": "~0.3"
+        "filp/whoops": "^2.7"
     },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "prefer-stable": true,
     "scripts": {
-        "post-install-cmd": [
-            "SlowProg\\CopyFile\\ScriptHandler::copy"
-        ],
-        "post-update-cmd": []
-    },
-    "extra": {
-        "copy-file": {
-            ".htaccess.example": ".htaccess",
-            ".env.example": ".env"
-        }
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php -r \"file_exists('.htaccess') || copy('.htaccess.example', '.htaccess');\""
+        ]
     }
 }
