@@ -10,7 +10,7 @@
 </p>
 
 ## About Wecodefy
-<p>Wecodefy is framework for making web application,you can build frontend by using modern javascript framework both Angular, React and Vue at the sametime but it is option you can choose one of them. Also it can be used to create Rest API. if you are not familiar with those js framework you can use Twig templating engine.</p>
+<p>Wecodefy is framework for making web application, you can build frontend by using modern javascript framework both Angular, React and Vue at the same time but it is optional you can choose one of them. Also it can be used to create Rest API. if you are not familiar with those JS framework you can use Twig templating engine.</p>
 
 <p>This framework combine Angular, Vue and React</p>
 <p>
