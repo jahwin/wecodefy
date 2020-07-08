@@ -10,7 +10,6 @@ $routes = [
         'path' => '/',
         'method' => 'GET',
         'folder' => 'site',
-        'middleware' => 'web',
         'return' => 'Home@welcome',
     ],
     [
