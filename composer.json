@@ -2,6 +2,10 @@
     "name": "jahwin/wecodefy",
     "description": "Wecodefy is framework for making web application, you can build frontend by using modern javascript framework both Angular, React and Vue at the same time but it is option you can choose one of them. Also it can be used to create Rest API. if you are not familiar with those JS framework you can use Twig templating engine.",
     "type": "project",
+    "keywords": [
+        "framework",
+        "wecodefy"
+    ],
     "license": "MIT",
     "authors": [{
         "name": "Abe Jahwin",
