@@ -20,6 +20,19 @@
         "fzaninotto/faker": "^1.9",
         "nette/http": "^3.0",
         "vlucas/phpdotenv": "^4.1",
-        "filp/whoops": "^2.7"
+        "filp/whoops": "^2.7",
+        "slowprog/composer-copy-file": "~0.3"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "SlowProg\\CopyFile\\ScriptHandler::copy"
+        ],
+        "post-update-cmd": []
+    },
+    "extra": {
+        "copy-file": {
+            ".htaccess.example": ".htaccess",
+            ".env.example": ".env"
+        }
     }
 }

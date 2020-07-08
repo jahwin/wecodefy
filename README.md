@@ -1,4 +1,4 @@
-# WECODEFY WEB FRAMEWORK : Better v1.0
+# WECODEFY WEB APPLICATION FRAMEWORK
 
 <p align="center"><img src="https://github.com/jahwin/wecodefy/blob/v1.0/assets/images/wecodefy.png" width="200"></p>
 
