@@ -39,6 +39,7 @@ This tool will also able to generate Angular, Vue, React components, Then at end
   * [Lets talk about wecodefy structure](#lets-talk-about-wecodefy-structure)
   * [Routing](#routing)
     + [Group routing](#group-routing)
+    + [Single routing](#single-routing)
   * [Middleware](#middleware)
   * [Controllers](#controllers)
   * [Views](#views)
