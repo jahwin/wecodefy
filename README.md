@@ -147,14 +147,23 @@ npm -v
 ### Servers that Wecodefy use
 <p>You can run Wecodefy framework by using XAMP , WAMP, LAMP or PHP server</p>
 
- `Note:` For those who will user XAMP, WAMP, LAMP make sure to set local domain on your wecodefy project, If you don't know how to do it please refer to this 
+ `Note:` For those who will user XAMP, WAMP, LAMP make sure to set local domain on your wecodefy project (`Ex:websitename.dev`), If you don't know how to do it please refer to this 
  <a target="_brank" href="https://phpcodez.com/xamp-change-localhost-to-domain/" class="wecodefy-btn">link </a>
 
-<p>Then after checking everything is fine, clone this  framework or download it from here </p>
+<p>Then after checking everything is fine, you have two option to get started to this framework: </p>
+
+`1:` USING COMPOSER<br>
+Paste this command to create blog project
+```
+composer create-project jahwin/wecodefy Blog
+```
+`2:` USING DOWNLOAD OPTION<br>
+Click on link below to download framework zip file
 <p>
 <a target="_brank" href="https://github.com/jahwin/wecodefy/archive/v1.0.zip" class="wecodefy-btn">DOWNLOAD </a>
 </p>
-<p>After download extract downloaded zip file where you run web server projects [htdocs, www,...]. After extracting run the following commands:</p>
+<p>After download extract downloaded zip file where you run web server projects [htdocs, www,...]. <br><br>
+After extracting run the following commands:</p>
 
 ``` 
 # This command is for installing  php composer packages
@@ -166,15 +175,19 @@ composer install
 npm install
 ```
 
-:runner::runner::runner::runner::runner::runner: Now you are able to go, If you are using XAMP, WAMP, LAMP you can direct run your project.
+:runner::runner::runner::runner::runner::runner: Now you are able to go.
 
-<p>If you want to use php server, use the following command:</p>
-
-
+<p>Use the following command to start server:</p>
 ``` 
 # This command is for running php server
 php run serve
 ```
+
+After running above command you will get project link (http://127.0.0.1:8000/)<br>
+`Note:` Make sure no other apps witch are using that port.
+
+For other who are using wamp,xamp,lamp they can access it by there configured local domain<br>
+`Ex:websitename.dev`
 
 <p>After running your project you will get Starter page we mentioned above.</p>
 
@@ -278,6 +291,39 @@ $routes = [
     ],
 ]
  ```
+
+### Single routing
+Some time you may need to locate every request to the same controller in case you want to use Vue,Angular,React in order to make that frameworks to handle route themselves.
+
+In our route config file there some change you have to make.
+
+```php
+/* -----------------------------
+ * This is condition array, please don't change any key just add values
+ * This will be user if you want to redirect all route to the same controller function
+ * -----
+ * This condition will be good for Vue,Angular,React
+ * -----
+ * Let that framework to handle routes
+ * ----
+ * You can enable or disable this condition
+ * ------------------------------
+ */
+$route_condition = [
+    'ENABLED' => true,
+    'ALL_TO' => [
+        'folder' => 'site',
+        'return' => 'Home@welcome',
+    ],
+    'EXCEPT' => ['/api','/admin'],
+];
+```
+Let understand the above codes:<br>
+ <b>ENABLE:</b> key will enable us to use that condition or not <br>
+ <b>ALL_TO:</b> key will help to set folder , controller and function we want to view on every request <br>
+<b>EXCEPT:</b> key is array of path we don't need to redirect to the same controller or view
+ 
+
 
 ## Middleware
 You can setup different authorization on your routes. The only thing you need is to add `middleware` key on any routes:

@@ -11,7 +11,11 @@
     <link rel="stylesheet" href="{{'APP_URL' | env}}assets/css/styles.css">
 </head>
 
-<body>
+<body style="background-image: url({{'APP_URL' |
+        env}}assets/images/cloud.svg); background-repeat: no-repeat;
+        background-position-y: 69vh;
+        background-position-x: center;
+        background-size: auto;">
     <div class="wecodefy-widget">
         <img src="{{'APP_URL' | env}}assets/images/wecodefy.png" width="200" alt="">
     </div>
@@ -21,6 +25,7 @@
     </div>
 
     <div class="app-widget">
+
         <div class="vue-app">
             <div id="app"></div>
         </div>
@@ -32,8 +37,8 @@
         </div>
     </div>
 
-    <img class="bg-image" src="{{'APP_URL' | env}}assets/images/cloud.svg" alt="" width="100%">
 </body>
+<!-- If you want to use Vue,React,Angular don't remove this main.js file -->
 <script type="text/javascript" src="{{'APP_URL' | env}}assets/js/main.js"></script>
 
 </html>

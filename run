@@ -1,10 +1,39 @@
 #!/usr/bin/env php
 
 <?php
-
-if (isset($argv[1])) {
-    if ($argv[1] == "serve") {
-      $output = shell_exec("php -S 127.0.0.1:8020");
-      echo "Listening:127.0.0.1:8020";   
+function isPort($host, $port)
+{
+    $connection = @fsockopen($host, $port);
+    if (is_resource($connection)) {
+        fclose($connection);
+        return false;
+    } else {
+        return true;
     }
+}
+
+if (isset($argv[2])) {
+    $port = $argv[2];
+    if (is_numeric($port)) {
+        if (isPort('127.0.0.1', $port)) {
+            shell_exec("php -S 127.0.0.1:" . $port);
+        } else {
+            echo "127.0.0.1:" . $port . " is being used by other app";
+        }
+    } else {
+        echo "Invalid port number\n\n";
+    }
+} else if (isset($argv[1])) {
+    if ($argv[1] == "serve") {
+        $port = 8000;
+        if (isPort('127.0.0.1', $port)) {
+            shell_exec("php -S 127.0.0.1:" . $port);
+        } else {
+            echo "127.0.0.1:" . $port . " is being used by other app, Try 'php run serve 8050' \n\n";
+        }
+    } else {
+        echo "Command not found\n\n";
+    }
+} else {
+    echo "Args not added, Try to add serve arg to start server\n\n";
 }
