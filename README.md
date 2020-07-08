@@ -159,7 +159,7 @@ npm -v
 Paste this command to create blog project
 
 ```
-composer create-project jahwin/wecodefy Blog
+composer create-project --prefer-dist  jahwin/wecodefy Blog
 ```
 
 This command will set everything for you, then navigate to your project folder Ex: `cd Blog` and run this command to start server
