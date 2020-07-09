@@ -40,6 +40,7 @@ This tool will also able to generate Angular, Vue, React components, Then at end
   * [Routing](#routing)
     + [Group routing](#group-routing)
     + [Single routing](#single-routing)
+    + [Set not Found routing](#set-not-found-page-or-not-found-rest-api-responce)
   * [Middleware](#middleware)
   * [Controllers](#controllers)
   * [Views](#views)
@@ -350,6 +351,29 @@ Let understand the above codes:<br>
  <b>ALL_TO:</b> key will help to set folder , controller and function we want to view on every request <br>
 <b>EXCEPT:</b> key is array of path we don't need to redirect to the same controller or view
  
+ ### Set not Found page or Not Found Rest Api responce
+ Some time you can need to add not found page or Not Found Rest Api, add the following code to your route array located in `/config/routes.php`.
+
+ ```php
+ $routes = [
+    [
+        'path' => '*',
+        'folder' => 'site',
+        'return' => 'Page@notFound',
+    ]
+ ];
+ ``` 
+ After placing that code you can set everything in your controller function, you can return your not found or you can check if your url containt api so then you can return json responce of not found.<br>
+Ex:
+
+```php
+if(isContain(url(),'/api')){
+    $array_obj = new \stdClass();
+    $array_obj->status = "fail";
+    $array_obj->message = 'Your request not found';
+    return responce(json_encode($array_obj),404);
+}
+```
 
 
 ## Middleware
