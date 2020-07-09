@@ -10,7 +10,7 @@ $generate = Factory::create();
 $database_seeder = [
     [
         'key' => 1,
-        'table' => 'tb_user',
+        'table' => 'user',
         'rows' => 10,
         'fields' => function () use ($generate) {
             return [

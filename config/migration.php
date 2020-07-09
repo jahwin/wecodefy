@@ -9,7 +9,7 @@ use Illuminate\Database\Schema\Blueprint;
 $db_up_migration = [
     [
         'key' => 1,
-        'table' => 'tb_user',
+        'table' => 'user',
         "todo" => 'create',
         'run' => function (Blueprint $table) {
             $table->bigIncrements('id');
@@ -20,7 +20,7 @@ $db_up_migration = [
             $table->timestamps();
         }
         ,
-        'reason' => 'Creating tb_user table',
+        'reason' => 'Creating user table',
     ],
 ];
 
@@ -33,9 +33,9 @@ $db_up_migration = [
 $db_down_migration = [
     [
         'key' => 1,
-        'table' => 'tb_user',
+        'table' => 'user',
         'todo' => 'delete',
         'run' => 'drop',
-        'reason' => 'Removing tb_user table',
+        'reason' => 'Removing user table',
     ],
 ];

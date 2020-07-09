@@ -26,7 +26,6 @@ $routes = [
     ],
     [
         'path' => '*',
-        'method' => 'GET',
         'folder' => 'site',
         'return' => 'Page@notFound',
     ],

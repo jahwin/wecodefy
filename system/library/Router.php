@@ -180,6 +180,7 @@ class Router extends SimpleRouter
                 parent::error(function (Request $request, \Exception $exception) use ($router) {
                     if ($exception instanceof NotFoundHttpException && $exception->getCode() === 404) {
                         Router::onSingleRoute($router);
+                        responce("", 404);
                     }
                 });
             }
