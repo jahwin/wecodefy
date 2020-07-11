@@ -35,8 +35,8 @@ This tool will also able to generate Angular, Vue, React components, Then at end
   * [Getting started](#getting-started--man-technologist-)
       - [Requirement](#requirement)
   * [Installation](#installation)
-     - [`1:` USING COMPOSER](#-1---using-composer)
-     - [`2:` USING DOWNLOAD OPTION](#-2---using-download-option)
+     - [`1:` USING COMPOSER](#using-composer)
+     - [`2:` USING DOWNLOAD OPTION](#using-download-option)
   * [Lets talk about wecodefy structure](#lets-talk-about-wecodefy-structure)
   * [Routing](#routing)
     + [Group routing](#group-routing)
@@ -156,7 +156,7 @@ npm -v
 
 <p>Then after checking everything is fine, you have two option to get started to this framework: </p>
 
-### `1:` USING COMPOSER
+### USING COMPOSER
 Paste this command to create blog project
 
 ```
@@ -175,7 +175,7 @@ After running above command you will get project link (http://127.0.0.1:8000/)<b
 ``` 
 php run serve 8001
 ```
-### `2:` USING DOWNLOAD OPTION
+### USING DOWNLOAD OPTION
 Click on link below to download framework zip file
 <p>
 <a target="_brank" href="https://github.com/jahwin/wecodefy/archive/v1.0.zip" class="wecodefy-btn">DOWNLOAD </a>
