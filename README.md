@@ -34,8 +34,9 @@ This tool will also able to generate Angular, Vue, React components, Then at end
 # Table of content
   * [Getting started](#getting-started--man-technologist-)
       - [Requirement](#requirement)
-      - [Installation](#installation)
-    + [Servers that Wecodefy use](#servers-that-wecodefy-use)
+  * [Installation](#installation)
+     - [`1:` USING COMPOSER](#-1---using-composer)
+     - [`2:` USING DOWNLOAD OPTION](#-2---using-download-option)
   * [Lets talk about wecodefy structure](#lets-talk-about-wecodefy-structure)
   * [Routing](#routing)
     + [Group routing](#group-routing)
@@ -118,18 +119,18 @@ After installation you will get this page:<br>
 
 #### Requirement
 - [x] <b>OS:</b> This framework can work on every operating system wich is able to run php script language.
-- [x] <b>PHP:</b> php <= 7.2 is required  to run on this framework.
+- [x] <b>PHP:</b> php >= 7.2.5 is required  to run on this framework.
 - [x] <b>Node:</b> v12.14.0 is required
 - [x] <b>Npm:</b> v6.13.4 is required
 - [x] <b>Composer:</b> Composer is required to install php packages
 - [x] <b>Internet:</b> Internet will be used to install php and npm dependencies
 
-#### Installation
 <p>To install Wecodefy, first make sure that PHP and Node are installed in the local computer.
 In case node is not installed in your computer click 
 <a href="https://nodejs.org/en/download/" target="_brank">here</a> to install it.</p>
 
 To check if PHP, node and npm, are successfully installed in your computer, run the following commands in your terminal or command prompt:<br>
+
 ``` 
 # For checking php version
 php -v 
@@ -145,18 +146,17 @@ node -v
 npm -v 
 ```
 
-
-### Servers that Wecodefy use
 <p>You can run Wecodefy framework by using XAMP , WAMP, LAMP or PHP server</p>
 
- `Note:` For those who will user XAMP, WAMP, LAMP make sure to set local domain on your wecodefy project (`Ex:websitename.dev`), If you don't know how to do it please refer to this 
+ `Note:` For those who will use XAMP, WAMP, LAMP make sure to set local domain on your wecodefy project (`Ex:websitename.dev`), If you don't know how to do it please refer to this 
  <a target="_brank" href="https://phpcodez.com/xamp-change-localhost-to-domain/" class="wecodefy-btn">link </a>
+
+
+# Installation
 
 <p>Then after checking everything is fine, you have two option to get started to this framework: </p>
 
----
-
-`1:` USING COMPOSER<br>
+### `1:` USING COMPOSER
 Paste this command to create blog project
 
 ```
@@ -175,10 +175,7 @@ After running above command you will get project link (http://127.0.0.1:8000/)<b
 ``` 
 php run serve 8001
 ```
-
----
-
-`2:` USING DOWNLOAD OPTION<br>
+### `2:` USING DOWNLOAD OPTION
 Click on link below to download framework zip file
 <p>
 <a target="_brank" href="https://github.com/jahwin/wecodefy/archive/v1.0.zip" class="wecodefy-btn">DOWNLOAD </a>
@@ -219,7 +216,7 @@ For other who are using wamp,xamp,lamp they can access it by there configured lo
 
 <p>After running your project you will get starter page we mentioned above.</p>
 
-## Lets talk about wecodefy structure
+# Lets talk about wecodefy structure
 <p>
   This is normal MVC pattern based, That means you can deal with Views, Controllers and Models
 </p>

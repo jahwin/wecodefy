@@ -15,7 +15,7 @@
         "pecee/simple-router": "4.2.0.6",
         "phpmailer/phpmailer": "^6.0",
         "illuminate/database": "^5.8",
-        "twig/twig": "^3.0",
+        "twig/twig": "^2.13",
         "nesbot/carbon": "^2.28",
         "fzaninotto/faker": "^1.9",
         "nette/http": "^3.0",
