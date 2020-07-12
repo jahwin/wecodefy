@@ -10,7 +10,7 @@ $routes = [
         'path' => '/',
         'method' => 'GET',
         'folder' => 'site',
-        'return' => 'Home@welcome',
+        'return' => 'HomeController@index',
     ],
     [
         'path' => '/api',
@@ -19,7 +19,7 @@ $routes = [
                 'path' => '/user',
                 'method' => 'GET',
                 'folder' => 'api',
-                'return' => 'home@welcome',
+                'return' => 'HomeController@index',
             ],
         ],
 
@@ -27,7 +27,7 @@ $routes = [
     [
         'path' => '*',
         'folder' => 'site',
-        'return' => 'Page@notFound',
+        'return' => 'PagesController@index',
     ],
 ];
 
@@ -46,7 +46,7 @@ $route_condition = [
     'ENABLED' => false,
     'ALL_TO' => [
         'folder' => 'site',
-        'return' => 'Home@welcome',
+        'return' => 'HomeController@index',
     ],
     'EXCEPT' => ['/api'],
 ];
