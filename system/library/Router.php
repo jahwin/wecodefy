@@ -31,25 +31,30 @@ class Router extends SimpleRouter
          * Developer routes
          * ----------------------
          */
-        if (_env('DEVELOPMENT', true) === 'true') {
-            parent::group(['prefix' => "/dev/ui"], function () {
 
-                parent::get('/', 'system\dev\controller\Home@welcome');
-                parent::get('/{path}', 'system\dev\controller\Home@welcome')->where(['path' => '(database)']);
-                // API
-                parent::group(['prefix' => "/api"], function () {
-                    parent::post('/generate', 'system\dev\controller\Generate@init');
-                    parent::get('/run-migration', 'system\dev\controller\Database@runMigration');
-                    parent::get('/reverse-migration', 'system\dev\controller\Database@reverseMigration');
-                    parent::get('/run-seeder', 'system\dev\controller\Database@runSeeder');
-                    parent::get('/reverse-seeder', 'system\dev\controller\Database@reverseSeeder');
-                    parent::post('/angular-g-component', 'system\dev\controller\Angular@generateComponent');
-                    parent::post('/angular-g-service', 'system\dev\controller\Angular@generateService');
-                    parent::post('/create-vue-component', 'system\dev\controller\Vue@generateComponent');
-                    parent::post('/create-react-component', 'system\dev\controller\React@generateComponent');
-                    parent::get('/build-js', 'system\dev\controller\Build@buildComponent');
+        if (_env('DEVELOPMENT', true) === 'true') {
+            if (isContain(url(), '/dev/ui')) {
+                parent::group(['prefix' => "/dev/ui"], function () {
+
+                    parent::get('/', 'system\dev\controller\Home@welcome');
+                    parent::get('/{path}', 'system\dev\controller\Home@welcome')->where(['path' => '(database)']);
+                    // API
+                    parent::group(['prefix' => "/api"], function () {
+                        parent::post('/generate', 'system\dev\controller\Generate@init');
+                        parent::get('/run-migration', 'system\dev\controller\Database@runMigration');
+                        parent::get('/reverse-migration', 'system\dev\controller\Database@reverseMigration');
+                        parent::get('/run-seeder', 'system\dev\controller\Database@runSeeder');
+                        parent::get('/reverse-seeder', 'system\dev\controller\Database@reverseSeeder');
+                        parent::post('/angular-g-component', 'system\dev\controller\Angular@generateComponent');
+                        parent::post('/angular-g-service', 'system\dev\controller\Angular@generateService');
+                        parent::post('/create-vue-component', 'system\dev\controller\Vue@generateComponent');
+                        parent::post('/create-react-component', 'system\dev\controller\React@generateComponent');
+                        parent::get('/build-js', 'system\dev\controller\Build@buildComponent');
+                    });
                 });
-            });
+                parent::start();
+                exit;
+            }
         }
         /* ----------------------
          * End of developer routes

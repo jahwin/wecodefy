@@ -248,7 +248,7 @@ $routes = [
         'path' => '/',
         'method' => 'GET',
         'folder' => 'site',
-        'return' => 'Home@welcome',
+        'return' => 'HomeController@index',
     ],
     [
         'path' => '/api',
@@ -257,7 +257,7 @@ $routes = [
                 'path' => '/',
                 'method' => 'GET',
                 'folder' => 'api',
-                'return' => 'Home@welcome',
+                'return' => 'HomeController@index',
             ],
         ],
 
@@ -312,7 +312,7 @@ $routes = [
                 'path' => '/',
                 'method' => 'GET',
                 'folder' => 'api',
-                'return' => 'Home@welcome',
+                'return' => 'HomeController@index',
             ],
         ],
 
@@ -341,7 +341,7 @@ $route_condition = [
     'ENABLED' => true,
     'ALL_TO' => [
         'folder' => 'site',
-        'return' => 'Home@welcome',
+        'return' => 'HomeController@index',
     ],
     'EXCEPT' => ['/api','/admin'],
 ];
@@ -359,7 +359,7 @@ Let understand the above codes:<br>
     [
         'path' => '*',
         'folder' => 'site',
-        'return' => 'Page@notFound',
+        'return' => 'PagesController@index',
     ]
  ];
  ``` 
@@ -386,7 +386,7 @@ $routes = [
         'method' => 'GET',
         'folder' => 'site',
         'middleware' => 'web',
-        'return' => 'Home@welcome',
+        'return' => 'HomeController@index',
     ]
 ]
 ```

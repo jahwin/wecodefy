@@ -21,19 +21,19 @@ class Generate
         // Check
         if ($controller && $controller_folder) {
             // Check or create controller file
-            $file = "app/controllers/{$folder_name}/" . $file_name . ".php";
+            $file = "app/controllers/{$folder_name}/" . $file_name . "Controller.php";
             if (!file_exists($file)) {
                 $content = $this->getControllerContent($folder_name, $file_name);
                 file_put_contents($file, $content);
                 chmod($file, 0777);
                 $proced = new \stdClass();
                 $proced->status = "success";
-                $proced->message = ucfirst($file_name) . " controller has been  created successfully - " . $date_now;
+                $proced->message = ucfirst($file_name) . "Controller" . " controller has been  created successfully - " . $date_now;
                 array_push($responce, $proced);
             } else {
                 $proced = new \stdClass();
                 $proced->status = "fail";
-                $proced->message = ucfirst($file_name) . " controller file you are trying to create is already exist - " . $date_now;
+                $proced->message = ucfirst($file_name) . "Controller" . " controller file you are trying to create is already exist - " . $date_now;
                 array_push($responce, $proced);
             }
         }
@@ -121,15 +121,37 @@ class Generate
 
   use system\library\Controller;
 
-  class ' . ucfirst($name) . ' extends Controller
+  class ' . ucfirst($name) . 'Controller extends Controller
     {
         public function __construct(){
             parent::__construct();
         }
 
-        public function welcome(){
+        public function index(){
             $data = array(\'name\' => "Welcome to ' . $name . '");
             return $this->render("' . $folder . '","' . $name . '/index.twig", $data);
+        }
+        public function create(){
+
+        }
+        public function  store(){
+
+        }
+
+        public function show($id){
+
+        }
+
+        public function edit($id){
+
+        }
+
+        public function update($id){
+
+        }
+
+        public function destroy($id){
+
         }
     };
 ?>';
