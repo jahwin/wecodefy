@@ -50,6 +50,7 @@ This tool will also able to generate Angular, Vue, React components, Then at end
 - [You can generate Models,Views,Controller by using Dev Management Tool](#you-can-generate-models-views-controller-by-using-dev-management-tool)
 - [Database](#database)
   * [Database connection](#database-connection)
+  * [Database migration using Postgres](#database-connection-using-Postgres)
   * [Database migration](#database-migration)
   * [Creating or updating table columns rules](#creating-or-updating-table-columns-rules)
     + [Available Column Types](#available-column-types)
@@ -618,6 +619,38 @@ DATABASE_PREFIX = tb
 DATABASE_USER = root
 DATABASE_PASS = 12345
 ```
+## Database connection using postgres
+```
+# This is database .env variables
+
+DATABASE_HOST = 127.0.0.1
+DATABASE_NAME = db_wecodefy
+DATABASE_PREFIX = tb
+DATABASE_USER = root
+DATABASE_PASS = 12345
+DATABASE_DRIVER = pgsql
+DATABASE_PORT = 5432
+```
+
+
+## This is database system/library/DB.php
+we have to edit the DB.php file in system/library folder to tell our system which db driver we wish to use and on which port it will run and the rest will be the same like using mysql.
+
+
+```php
+# This is database library /system/library/DB.php
+
+$conn = $capsule->addConnection([
+    'driver' =>  _env('DATABASE_DRIVER', 'mysql'),,
+    'host' => _env('DATABASE_HOST', '127.0.0.1'),
+    'database' => _env('DATABASE_NAME', 'wecodefy'),
+    'username' => _env('DATABASE_USER', 'root'),
+    'password' => _env('DATABASE_PASS', ''),
+    'port' => _env('DATABASE_PORT', ''),
+]);
+
+```
+
 ## Database migration
 This the way of manipulating database schema. You don't need to generate every file that can be used for making migration.
 
@@ -1591,7 +1624,7 @@ Have good job. Make your job done and fast.
 ----
 ### Contributing
 
-You are welcome to make contribution on this framework, Let make better wold by making most powerful and beautiful web application.
+You are welcome to make contribution on this framework, Let make better world by making most powerful and beautiful web applications.
 
 
 ### Security Vulnerabilities
