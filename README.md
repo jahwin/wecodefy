@@ -646,7 +646,7 @@ $conn = $capsule->addConnection([
     'database' => _env('DATABASE_NAME', 'wecodefy'),
     'username' => _env('DATABASE_USER', 'root'),
     'password' => _env('DATABASE_PASS', ''),
-    'port' => _env('DATABASE_PORT', ''),
+    'port' => _env('DATABASE_PORT', 3306),
 ]);
 
 ```
