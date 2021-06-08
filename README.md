@@ -612,11 +612,12 @@ You have to set database connection in .env file, if file not exist create it, t
 ```
 # This is database .env variables
 
-DATABASE_HOST = 127.0.0.1
-DATABASE_NAME = db_wecodefy
-DATABASE_PREFIX = tb
-DATABASE_USER = root
-DATABASE_PASS = 12345
+DB_HOST = 127.0.0.1
+DB_NAME = db_wecodefy
+DB_PREFIX = tb
+DB_USER = root
+DB_PASS = 12345
+DB_DRIVER = mysql
 ```
 ## Database migration
 This the way of manipulating database schema. You don't need to generate every file that can be used for making migration.

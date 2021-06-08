@@ -10,7 +10,7 @@ use system\dev\controller\errorsExec;
 
 $capsule = new Database;
 $conn = $capsule->addConnection([
-    'driver' => 'mysql',
+    'driver' => _env('DB_DRIVER','mysql'),
     'host' => _env('DB_HOST', '127.0.0.1'),
     'database' => _env('DB_NAME', 'wecodefy'),
     'username' => _env('DB_USER', 'root'),
